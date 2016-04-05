@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class blogs extends Model
+class article extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,7 +12,7 @@ class blogs extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'blogs_uid', 'content', 'post_time', 'reply_count', 
+        'title', 'article_id', 'content', 'post_time', 'comment_count', 
         'read_count', 'last_change_time', 'is_del'
     ];
 
@@ -21,13 +21,18 @@ class blogs extends Model
         return $this->belongsTo('App\users', 'foreign_key');
     }
 
-    public function reply()
+    public function comments()
     {
-        return $this->hasMany('App\replies');
+        return $this->hasMany('App\comments');
     }
 
-    public function attachment()
+    public function attachments()
     {
-        return $this->belongsToMany('App\attachments');
+        return $this->hasMany('App\attachments');
+    }
+
+    public function tags()
+    {
+        return $this->hasMany('App\tags');
     }
 }

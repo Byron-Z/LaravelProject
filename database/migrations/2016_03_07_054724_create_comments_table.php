@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAttachmentsTable extends Migration
+class CreateCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,34 +12,28 @@ class CreateAttachmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('attachments', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->engine = 'InnoDB';
+            //Comment id
             $table->increments('id');
+            //Comment user id
+            $table->integer('uid')->unsigned();
             //Article ID
             $table->integer('article_id')->unsigned();
-            //Attachment title
-            $table->string('title');
-            //Attachment description
-            $table->text('desc');
-            //Attachment size
-            $table->integer('size');
-            //Attachment type
-            $table->string('extension');
-            //Attachment uploading time
+            //Comment content
+            $table->text('content');
+            //Comment time
             $table->dateTime('ctime');
+            //Comment id of the comment you reply
+            $table->integer('to_reply_id')->unsigned();
             //Delete flag
             $table->boolean('is_del')->default(false);
-            //Attachment save path in server
-            $table->string('save_path');
-            //Attachment user defined name
-            $table->string('save_name');
-            //Attachment url
-            $table->string('url');
             $table->softDeletes();
             $table->timestamps();
         });
 
-        Schema::table('attachments', function ($table) {
+        Schema::table('comments', function ($table) {
+            $table->foreign('uid')->references('id')->on('users');
             $table->foreign('article_id')->references('id')->on('articles');
         });
     }
@@ -51,6 +45,6 @@ class CreateAttachmentsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('attachments');
+        Schema::drop('comments');
     }
 }
