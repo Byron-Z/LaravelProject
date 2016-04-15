@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class attachment extends Model
+class Attachment extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -19,6 +19,6 @@ class attachment extends Model
 
     public function article()
     {
-        return $this->belongsTo('App\articles');
+        return $this->belongsTo('App\Article');
     }
 }

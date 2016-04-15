@@ -3,8 +3,9 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Auth\Passwords\CanResetPassword;
 
-class user extends Authenticatable
+class User extends Authenticatable
 {
     /**
      * The attributes that are mass assignable.
@@ -12,12 +13,12 @@ class user extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password'
+        'name', 'email', 'password',
     ];
 
     public function articles()
     {
-        return $this->hasMany('App\articles');
+        return $this->hasMany('App\Article');
     }
     
     /**
