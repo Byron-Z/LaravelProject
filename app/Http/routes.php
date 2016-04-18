@@ -12,8 +12,10 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('blogmain');
 });
+Route::post('/create/preview', array('before' => 'auth', 'uses' => 'ArticleController@preview'));
+Route::get('/create', 'ArticleController@create');
 
 /*
 |--------------------------------------------------------------------------

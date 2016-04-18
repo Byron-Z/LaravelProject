@@ -1,0 +1,19 @@
+Test cases:
+1. set is empty, call remove()(should return false)
+2. set is full, reinstantiate a new array
+3. insert an element of different type into set, e.g. string -> set(integer)
+should report error: incompatible types: String cannot be converted to Integer
+4. insert an duplicate element into set
+should return false
+5. remove a non-exist element from set
+should return false
+6. insert one null element
+(should be OK)
+7. insert two null elements
+should return false
+8. insert huge amount that larger than the max_capacity of set
+
+9. set has no order
+
+
+Generic
