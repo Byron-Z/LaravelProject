@@ -1,6 +1,7 @@
 /node_modules
 Homestead.yaml
 Homestead.json
+composer.lock
 .env
 .DS_Store
 composer.lock
