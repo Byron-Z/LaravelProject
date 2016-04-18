@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class comment extends Model
+class Comment extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -18,11 +18,11 @@ class comment extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\users', 'foreign_key');
+        return $this->belongsTo('App\User', 'foreign_key');
     }
 
     public function article()
     {
-        return $this->belongsTo('App\articles', 'foreign_key');
+        return $this->belongsTo('App\Article', 'foreign_key');
     }
 }
