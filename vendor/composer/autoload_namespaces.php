@@ -7,6 +7,9 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'phpDocumentor' => array($vendorDir . '/phpdocumentor/reflection-docblock/src'),
+    'name' => array($vendorDir . '/erusev/parsedown/Michael Dowling'),
+    'homepage' => array($vendorDir . '/erusev/parsedown/https:/github.com/mtdowling'),
+    'email' => array($vendorDir . '/erusev/parsedown/mtdowling@gmail.com'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log'),
     'Prophecy\\' => array($vendorDir . '/phpspec/prophecy/src'),
     'Parsedown' => array($vendorDir . '/erusev/parsedown'),

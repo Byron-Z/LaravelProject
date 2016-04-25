@@ -12,11 +12,11 @@ class Tag extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'count'
+        'name', 'tag_uid', 'count'
     ];
 
     public function articles()
     {
-        return $this->hasMany('App\Article');
+        return $this->belongsToMany('App\Article')->withTimestamps();
     }
 }

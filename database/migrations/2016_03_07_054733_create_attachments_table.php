@@ -26,7 +26,7 @@ class CreateAttachmentsTable extends Migration
             //Attachment type
             $table->string('extension');
             //Attachment uploading time
-            $table->dateTime('ctime');
+            //$table->dateTime('ctime');
             //Delete flag
             $table->boolean('is_del')->default(false);
             //Attachment save path in server

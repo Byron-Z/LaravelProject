@@ -12,8 +12,8 @@ class Article extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'article_id', 'content', 'post_time', 'comment_count', 
-        'read_count', 'last_change_time', 'is_del'
+        'title', 'article_uid', 'content', 'comment_count', 
+        'read_count', 'is_del', 'comment_permition', 'is_public', 'reproduct_permition', 'type',
     ];
 
     public function user()
@@ -33,6 +33,6 @@ class Article extends Model
 
     public function tags()
     {
-        return $this->hasMany('App\Tag');
+        return $this->belongsToMany('App\Tag')->withTimestamps();
     }
 }

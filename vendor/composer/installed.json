@@ -3101,7 +3101,6 @@
         "homepage": "https://symfony.com"
     },
     {
-<<<<<<< HEAD
         "name": "twbs/bootstrap",
         "version": "v3.3.6",
         "version_normalized": "3.3.6.0",
@@ -3127,7 +3126,6 @@
             }
         },
         "installation-source": "dist",
-=======
         "name": "guzzlehttp/promises",
         "version": "1.1.0",
         "version_normalized": "1.1.0.0",
@@ -3164,14 +3162,12 @@
                 "src/functions_include.php"
             ]
         },
->>>>>>> d8318527c26df96bd3129ee1fbfd9600a5638ed0
         "notification-url": "https://packagist.org/downloads/",
         "license": [
             "MIT"
         ],
         "authors": [
             {
-<<<<<<< HEAD
                 "name": "Jacob Thornton",
                 "email": "jacobthornton@gmail.com"
             },
@@ -3213,13 +3209,12 @@
         "installation-source": "dist",
         "autoload": {
             "psr-0": {
-                "Parsedown": ""
-=======
+                "Parsedown": "",
                 "name": "Michael Dowling",
                 "email": "mtdowling@gmail.com",
                 "homepage": "https://github.com/mtdowling"
             }
-        ],
+        },
         "description": "Guzzle promises library",
         "keywords": [
             "promise"
@@ -3393,10 +3388,6 @@
         "keywords": [
             "markdown",
             "parser"
-                "name": "Michael Dowling",
-                "email": "mtdowling@gmail.com",
-                "homepage": "https://github.com/mtdowling"
-            }
         ],
         "description": "Guzzle is a PHP HTTP client library",
         "homepage": "http://guzzlephp.org/",

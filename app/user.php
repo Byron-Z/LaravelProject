@@ -20,6 +20,12 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Article');
     }
+
+    public function users()
+    {
+        return $this->belongsToMany('App\User')->withTimestamps();;
+    }
+    
     
     /**
      * The attributes excluded from the model's JSON form.

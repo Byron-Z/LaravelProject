@@ -23,7 +23,7 @@ class CreateCommentsTable extends Migration
             //Comment content
             $table->text('content');
             //Comment time
-            $table->dateTime('ctime');
+            //$table->dateTime('ctime');
             //Comment id of the comment you reply
             $table->integer('to_reply_id')->unsigned();
             //Delete flag

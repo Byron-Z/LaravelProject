@@ -12,8 +12,8 @@ class Attachment extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'desc', 'ctime', 'size',
-        'extension', 'privilege', 'is_del', 'save_path', 'save_name',
+        'title', 'desc', 'size', 'extension',
+        'privilege', 'is_del', 'save_path', 'save_name',
         'url'
     ];
 

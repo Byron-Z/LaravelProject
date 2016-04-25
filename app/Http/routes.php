@@ -12,11 +12,10 @@
 */
 
 
-Route::get('/blog', function () {
-    return view('blogmain');
-});
-Route::post('/create/preview', array('before' => 'auth', 'uses' => 'ArticleController@preview'));
-Route::get('/create', 'ArticleController@create');
+Route::get('/blog', 'SelfMainpageController@index');
+Route::post('/create/preview', 'CreateArticleController@preview');
+Route::get('/create', 'CreateArticleController@create');
+Route::post('/blog', 'CreateArticleController@store');
 
 /*
 |--------------------------------------------------------------------------
