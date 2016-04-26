@@ -13,10 +13,11 @@
 
 
 Route::get('/blog', 'SelfMainpageController@index');
-Route::post('/create/preview', 'CreateArticleController@preview');
-Route::get('/create', 'CreateArticleController@create');
-Route::post('/blog', 'CreateArticleController@store');
-
+Route::post('/create/preview', 'ArticleController@preview');
+Route::get('/create', 'ArticleController@create');
+Route::post('/blog', 'ArticleController@store');
+Route::get('/blog/article/{id}/edit', 'ArticleController@edit');
+Route::get('/blog/article', 'SelfMainpageController@readMore');
 /*
 |--------------------------------------------------------------------------
 | Application Routes

@@ -64,39 +64,32 @@
 		</div>
 		<!-- /.input-group -->
 	</div>
-	<!-- Blog Categories Well -->
+	<!-- Blog Tags Well -->
 	<div class="well">
-		<h4>Blog Categories</h4>
-		<div class="row">
-			<div class="col-lg-6">
-				<ul class="list-unstyled">
-					<li><a href="#">Category Name</a>
+		<h4>Blog Tags</h4>
+		<!-- <ul class="list-group">
+			@if (isset($tags))
+                @foreach ($tags as $tag)
+  				<li class="list-group-item">
+  					<span class="badge">{{$tag->count}}</span>
+  					<a href="#">{{$tag->name}}</a>
 				</li>
-				<li><a href="#">Category Name</a>
-			</li>
-			<li><a href="#">Category Name</a>
-		</li>
-		<li><a href="#">Category Name</a>
-	</li>
-</ul>
-</div>
-<!-- /.col-lg-6 -->
-<div class="col-lg-6">
-<ul class="list-unstyled">
-	<li><a href="#">Category Name</a>
-</li>
-<li><a href="#">Category Name</a>
-</li>
-<li><a href="#">Category Name</a>
-</li>
-<li><a href="#">Category Name</a>
-</li>
-</ul>
-</div>
-<!-- /.col-lg-6 -->
-</div>
-<!-- /.row -->
-</div>
+				@endforeach
+			@endif
+		</ul> -->
+		@if (isset($tags))
+            @foreach ($tags as $tag)
+            <div class="row">
+				<div class="col-lg-6">
+					<a href="#">{{$tag->name}}</a>
+				</div>
+				<div class="col-lg-3"></div>
+				<div class="col-lg-3"><span class="badge">{{$tag->count}}</span></div>
+			</div>
+		<!-- /.row -->
+			@endforeach
+		@endif
+	</div>
 <!-- Side Widget Well -->
 <div class="well">
 <h4>Side Widget Well</h4>
