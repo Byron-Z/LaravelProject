@@ -8,13 +8,15 @@
     <h1>Log-in</h1><br>
         <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
             {!! csrf_field() !!}
-            Email <input type="text" name="email" value="{{ old('email')}}">
+            <label for="exampleInputEmail">Email</label>
+            <input type="text" name="email" value="{{ old('email')}}" placeholder="Email">
             @if ($errors->has('email'))
                 <span class="help-block">
                     <strong>{{ $errors->first('email') }}</strong>
                 </span>
             @endif
-            Password <input type="password" name="password" placeholder="Password">
+            <label for="exampleInputPassword">Password</label>
+            <input type="password" name="password" placeholder="Password">
             @if ($errors->has('password'))
                 <span class="help-block">
                     <strong>{{ $errors->first('password') }}</strong>

@@ -10,7 +10,8 @@
         {!! csrf_field() !!}
 
         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-          <input type="text" name="name" value="{{ old('name')}}" placeholder="Username">
+          <label class="sr-only" for="InputName">Name</label>
+          <input type="text" name="name" value="{{ old('name')}}" placeholder="username">
             @if ($errors->has('name'))
               <span class="help-block">
                 <strong>{{ $errors->first('name') }}</strong>
@@ -19,6 +20,7 @@
         </div>
 
         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+          <label class="sr-only" for="InputEmail">Email</label>
           <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="example@gmail.com">
             @if ($errors->has('email'))
               <span class="help-block">
@@ -29,7 +31,8 @@
 
 
         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-          <input type="password" class="form-control" name="password" placeholder="Password">
+          <label class="sr-only" for="InputPassword">Password</label>
+          <input type="password" class="form-control" name="password" placeholder="password">
             @if ($errors->has('password'))
               <span class="help-block">
                 <strong>{{ $errors->first('password') }}</strong>
@@ -38,14 +41,15 @@
         </div>
 
         <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-          <input type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password">
+          <label class="sr-only" for="InputPassword">Password</label>
+          <input type="password" class="form-control" name="password_confirmation" placeholder="confirm password">
             @if ($errors->has('password_confirmation'))
               <span class="help-block">
                 <strong>{{ $errors->first('password_confirmation') }}</strong>
               </span>
             @endif
         </div>
-       
+        <label class="sr-only" for="submit">Submit</label>
         <input type="submit" name="register" class="login login-submit" value="Register">
       </form>
     
