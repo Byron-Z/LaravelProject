@@ -10,17 +10,17 @@
 
 				 @if (isset($article))
 				 	<h2>
-                    {{$article[0]->title}}
+                    {{$article->title}}
                     </h2>
                     <p>
-                        <span class="glyphicon glyphicon-time"></span> Posted on {{$article[0]->created_at}}
-                        <span class="glyphicon glyphicon-time"></span> Updated on {{$article[0]->updated_at}}
+                        <span class="glyphicon glyphicon-time"></span> Posted on {{$article->created_at}}
+                        <span class="glyphicon glyphicon-time"></span> Updated on {{$article->updated_at}}
                     </p>
                     <p>
-                        <span class="glyphicon glyphicon-eye-open"></span> Read: {{$article[0]->read_count}}
+                        <span class="glyphicon glyphicon-eye-open"></span> Read: {{$article->read_count}}
                     </p>
                     <hr>
-                    {!! $article[0]->content !!}
+                    {!! $article->content !!}
                     <hr>
 				 @endif
 				 <br><br><br>

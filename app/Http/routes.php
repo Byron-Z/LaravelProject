@@ -17,7 +17,9 @@ Route::post('/create/preview', 'ArticleController@preview');
 Route::get('/create', 'ArticleController@create');
 Route::post('/blog', 'ArticleController@store');
 Route::get('/blog/article/{id}/edit', 'ArticleController@edit');
-Route::get('/blog/article', 'SelfMainpageController@readMore');
+
+
+Route::get('/blog/article', 'SelfMainpageController@readMore')->middleware('articleReadThrottle');
 /*
 |--------------------------------------------------------------------------
 | Application Routes
