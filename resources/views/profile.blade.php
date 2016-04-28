@@ -40,6 +40,11 @@
 	       				<div class="form-group">
 	       					<label class="sr-only" for="Name">Name</label>
 	       					<input type="text" name="name" class="form-control" placeholder= {{ ($profile==null) ? "Name" : $profile->user->name }}>
+	       					@if ($errors->has('name'))
+	       					    <span class="help-block" style="color:red">
+	       					        <strong>{{ $errors->first('name') }}</strong>
+	       					    </span>
+	       					@endif		
 	       				</div>
 	       			</div>
             	</div>
@@ -68,10 +73,20 @@
 	       				<div class="form-group">
 		       				<label for="Location">Country</label>
 		       				<input type="text" class="form-control" name="country" placeholder={{ ($profile==null) ? "e.g.China" : $profile->country}}>
+		       				@if ($errors->has('country'))
+		       				    <span class="help-block" style="color:red">
+		       				        <strong>{{ $errors->first('country') }}</strong>
+		       				    </span>
+		       				@endif
 	       				</div>
 	       				<div class="form-group">
 		       				<label for="Location">City</label>
 		       				<input type="text" class="form-control" name="city" placeholder={{ ($profile==null) ? "e.g.Beijing" : $profile->city}}>
+		       				@if ($errors->has('city'))
+		       				    <span class="help-block" style="color:red">
+		       				        <strong>{{ $errors->first('city') }}</strong>
+		       				    </span>
+		       				@endif
 	       				</div>
 	       			</div>
             	</div>
@@ -84,6 +99,11 @@
 	       				<div class="form-group">
 		       				<label class="sr-only" for="Phone Number">Phone Number</label>
 		       				<input type="text" class="form-control" name="phone" placeholder={{ ($profile==null) ? "9175202986" : $profile->phone}}>
+		       				@if ($errors->has('phone'))
+		       				    <span class="help-block" style="color:red">
+		       				        <strong>{{ $errors->first('phone') }}</strong>
+		       				    </span>
+		       				@endif
 	       				</div>	       							
 	       			</div>
             	</div>
@@ -96,6 +116,11 @@
 	       				<div class="form-group">
 		       				<label class="sr-only" for="Description">Description</label>
 		       				<textarea name="description" class="form-control" id="description" rows="6" placeholder= {{ (($profile==null) ? "description" : $profile->description) }} ></textarea>
+		       				@if ($errors->has('description'))
+		       				    <span class="help-block" style="color:red">
+		       				        <strong>{{ $errors->first('description') }}</strong>
+		       				    </span>
+		       				@endif
 		       			</div>		
 	       			</div>
             	</div>
