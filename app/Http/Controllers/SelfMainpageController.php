@@ -12,6 +12,7 @@ use App\Events\ArticleReadCount;
 use App\Tag;
 use DB;
 use Auth;
+use Validator;
 
 class SelfMainpageController extends Controller
 {
@@ -74,53 +75,71 @@ class SelfMainpageController extends Controller
     {
         if(Auth::check())
         {
-            $rules = [
+            $rules1 = [
             'name'   => 'required|max:100',
             'sex' => 'required',
-            'country'    => 'required',
-            'city' => 'required',
-            'phone'=>'required'|'^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$',
-
+            'country'    => 'required| max:20| min:2',
+            'city' => 'required| max:20 | min:2',
+            'phone'=>'required|regex:/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/',
+            'description' => 'required|max:200',
             ];
-    
-            if($this->profile != null){
-                if($request->input('name') != ""){
-                    $this->profile->user->name = $request->input('name');
-                    $this->profile->user->save();
-                    echo $this->profile->user->name;
-                }
-                if($request->input('sex') != ""){
-                    $this->profile->sex = $request->input('sex');
-                }
-                if($request->input('country') != ""){
-                    $this->profile->country = $request->input('country');
-                }
-                if($request->input('city') != ""){
-                    $this->profile->city = $request->input('city');
-                }
-                if($request->input('phone') != ""){
-                    $this->profile->phone = $request->input('phone');
-                }
-                if($request->input('description') != ""){
-                    $this->profile->description = $request->input('description');
-                }
-                $this->profile->save();
 
-            } else {
-                UserProfile::create([
-                'user_id' => Auth::id(),
-                'phone' => $request->input('phone'),
-                'sex' => $request->input('sex'),
-                'city' => $request->input('city'),
-                'country' => $request->input('country'),
-                'description' => $request->input('description'),
-                ]);
-                
-                $user = User::where('id', Auth::id())->get()->first();
-                $user->name = ($request->input('name') == "") ? $user->name : $request->input('name');
+            $rules2 = [
+            'name'   => 'max:100',
+            'country'    => 'max:20| min:2',
+            'city' => 'max:20 | min:2',
+            'phone'=>'regex:/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/',
+            'description' => 'max:200',
+            ];
+
+            $validator1 = Validator::make($request->input(), $rules1);
+            $validator2 = Validator::make($request->input(), $rules2);
+
+             if($this->profile != null){
+                if($validator2->passes()){
+                    if($request->input('name') != ""){
+                        $this->profile->user->name = $request->input('name');
+                        $this->profile->user->save();
+                        echo $this->profile->user->name;
+                    }
+                    if($request->input('sex') != ""){
+                        $this->profile->sex = $request->input('sex');
+                    }
+                    if($request->input('country') != ""){
+                        $this->profile->country = $request->input('country');
+                    }
+                    if($request->input('city') != ""){
+                        $this->profile->city = $request->input('city');
+                    }
+                    if($request->input('phone') != ""){
+                        $this->profile->phone = $request->input('phone');
+                    }
+                    if($request->input('description') != ""){
+                        $this->profile->description = $request->input('description');
+                    }
+                    $this->profile->save();
+                } else{
+                    return redirect('/profile')->withInput()->withErrors($validator2);
+                }
+            } else{
+                if ($validator1->passes()) {
+                    UserProfile::create([
+                    'user_id' => Auth::id(),
+                    'phone' => $request->input('phone'),
+                    'sex' => $request->input('sex'),
+                    'city' => $request->input('city'),
+                    'country' => $request->input('country'),
+                    'description' => $request->input('description'),
+                    ]);
+                    
+                    $user = User::where('id', Auth::id())->get()->first();
+                    $user->name = ($request->input('name') == "") ? $user->name : $request->input('name');
+
+                } else{
+                    return redirect('/profile')->withInput()->withErrors($validator1);
+                }
 
             }
-            
             return redirect()->action('SelfMainpageController@showProfile');
         }
     }
