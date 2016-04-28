@@ -77,14 +77,14 @@
 				@endforeach
 			@endif
 		</ul> -->
-		@if (isset($tags))
-            @foreach ($tags as $tag)
+		@if (isset($sidebarTags))
+            @foreach ($sidebarTags as $sidebarTag)
             <div class="row">
 				<div class="col-lg-6">
-					<a href="#">{{$tag->name}}</a>
+					<a href="#">{{$sidebarTag->name}}</a>
 				</div>
 				<div class="col-lg-3"></div>
-				<div class="col-lg-3"><span class="badge">{{$tag->count}}</span></div>
+				<div class="col-lg-3"><span class="badge">{{$sidebarTag->count}}</span></div>
 			</div>
 		<!-- /.row -->
 			@endforeach

@@ -15,15 +15,15 @@ use App\Tag;
 use DB;
 use Auth;
 
-class ArticleController extends Controller
+class ArticleController extends ArticleBaseController
 {
+
     public function create()
     {
         DB::enableQueryLog();
-        $tags = DB::table('tags')->where('tag_uid', Auth::id())->get();
+        $tags = Tag::with(['user' => function ($query) {$query->where('id', Auth::id());}])->orderBy('count', 'desc')->orderBy('updated_at', 'desc')->get();
         //dd(DB::getQueryLog());
-        $recentPosts = Article::where('article_uid', Auth::id())->orderBy('created_at', 'desc')->take(3)->get();
-        return view('create', ['tags' => $tags, 'recentPosts' => $recentPosts,]);
+        return view('create', ['tags' => $tags, ]);
     }
 
     public function edit($id)

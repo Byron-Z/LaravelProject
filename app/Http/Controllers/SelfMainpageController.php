@@ -14,9 +14,9 @@ use DB;
 use Auth;
 use Validator;
 
-class SelfMainpageController extends Controller
+class SelfMainpageController extends ArticleBaseController
 {
-    private $tags;
+/*    private $tags;
     private $recentPosts;
     private $profile;
 
@@ -25,7 +25,7 @@ class SelfMainpageController extends Controller
         $this->tags = Tag::with(['user' => function ($query) {$query->where('id', Auth::id());}])->where('count', '>', '0')->orderBy('count', 'desc')->orderBy('updated_at', 'desc')->take(8)->get();
         $this->recentPosts = Article::where('article_uid', Auth::id())->orderBy('created_at', 'desc')->take(3)->get();
         $this->profile = UserProfile::where('user_id', Auth::id())->get()->first();
-    }
+    }*/
 
     public function index()
     {
@@ -35,7 +35,7 @@ class SelfMainpageController extends Controller
             $articles = Article::where('article_uid', Auth::id())->orderBy('updated_at', 'desc')->take(3)->get();
             //$tags = Tag::with(['user' => function ($query) {$query->where('id', Auth::id());}])->where('count', '>', '0')->orderBy('count', 'desc')->orderBy('updated_at', 'desc')->take(8)->get();
             //dd(DB::getQueryLog());
-            return view('personal_mainpage', ['articles' => $articles, 'tags' => $this->tags, 'recentPosts' => $this->recentPosts,]);
+            return view('personal_mainpage', ['articles' => $articles, ]);
         }
     }
 
@@ -48,9 +48,7 @@ class SelfMainpageController extends Controller
 
             event(new ArticleReadCount($article));
 
-            //$tags = Tag::with(['user' => function ($query) {$query->where('id', Auth::id());}])->where('count', '>', '0')->orderBy('count', 'desc')->orderBy('updated_at', 'desc')->take(8)->get();
-	        //dd(DB::getQueryLog());
-	        return view('article', ['article' => $article, 'tags' => $this->tags,'recentPosts' => $this->recentPosts,]);
+	        return view('article', ['article' => $article, ]);
 	    }
     }
 
@@ -67,7 +65,7 @@ class SelfMainpageController extends Controller
                 $reminder = "Edit Personal Information";
             }
             
-            return view('profile',['tags' => $this->tags,'recentPosts' => $this->recentPosts, 'reminder'=>$reminder, 'profile' => $this->profile]);
+            return view('profile',['tags' => $this->tags, 'reminder'=>$reminder, ]);
         }
     }
 

@@ -9,14 +9,14 @@
 			<div class="col-md-9">
 
 				@if (isset($article))
-				 	<h2>{{$article[0]->title}}</h2>
+				 	<h2>{{$article->title}}</h2>
                     <p>
-                        <span class="glyphicon glyphicon-time"></span> Posted on {{$article[0]->created_at}}
+                        <span class="glyphicon glyphicon-time"></span> Posted on {{$article->created_at}}
                         &nbsp;&nbsp;
-                        <span class="glyphicon glyphicon-time"></span> Updated on {{$article[0]->updated_at}}
+                        <span class="glyphicon glyphicon-time"></span> Updated on {{$article->updated_at}}
                         &nbsp;&nbsp;
-                        <span class="glyphicon glyphicon-eye-open"></span> Read: {{$article[0]->read_count}}
-                        <a href="/blog/article/{{$article[0]->id}}/edit" class="btn btn-success btn-sm pull-right" role="button">Edit</a>
+                        <span class="glyphicon glyphicon-eye-open"></span> Read: {{$article->read_count}}
+                        <a href="/blog/article/{{$article->id}}/edit" class="btn btn-success btn-sm pull-right" role="button">Edit</a>
                     </p>
                     <hr>
                     {!! $article->content !!}
