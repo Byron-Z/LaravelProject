@@ -8,16 +8,15 @@
 			@include('layouts.sidebar')
 			<div class="col-md-9">
 
-				 @if (isset($article))
-				 	<h2>
-                    {{$article[0]->title}}
-                    </h2>
+				@if (isset($article))
+				 	<h2>{{$article[0]->title}}</h2>
                     <p>
                         <span class="glyphicon glyphicon-time"></span> Posted on {{$article[0]->created_at}}
+                        &nbsp;&nbsp;
                         <span class="glyphicon glyphicon-time"></span> Updated on {{$article[0]->updated_at}}
-                    </p>
-                    <p>
+                        &nbsp;&nbsp;
                         <span class="glyphicon glyphicon-eye-open"></span> Read: {{$article[0]->read_count}}
+                        <a href="/blog/article/{{$article[0]->id}}/edit" class="btn btn-success btn-sm pull-right" role="button">Edit</a>
                     </p>
                     <hr>
                     {!! $article[0]->content !!}

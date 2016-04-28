@@ -9,7 +9,7 @@
 		<!-- SIDEBAR USER TITLE -->
 		<div class="profile-usertitle">
 			<div class="profile-usertitle-name">
-				{{$name}}
+				{{Auth::user()->name}}
 			</div>
 		</div>
 		<!-- END SIDEBAR USER TITLE -->
