@@ -17,13 +17,13 @@ use Auth;
 
 class ArticleController extends Controller
 {
-
     public function create()
     {
         DB::enableQueryLog();
         $tags = DB::table('tags')->where('tag_uid', Auth::id())->get();
         //dd(DB::getQueryLog());
-        return view('create', ['tags' => $tags, ]);
+        $recentPosts = Article::where('article_uid', Auth::id())->orderBy('created_at', 'desc')->take(3)->get();
+        return view('create', ['tags' => $tags, 'recentPosts' => $recentPosts,]);
     }
 
     public function edit($id)

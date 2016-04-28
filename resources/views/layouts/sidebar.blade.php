@@ -92,7 +92,17 @@
 	</div>
 <!-- Side Widget Well -->
 <div class="well">
-<h4>Side Widget Well</h4>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
+<h4>Recent Posts</h4>
+	
+		@foreach ($recentPosts as $post)
+		<div class="row">
+				<div class="col-lg-3">
+					<a href="/blog/article?id={{$post->id}}">{{$post->title}}</a>
+				</div>
+				<div class="col-lg-9">{{$post->created_at}}</div>
+				<br><br>
+		</div>
+		@endforeach
+	
 </div>
 </div>
