@@ -19,7 +19,7 @@
                         <a href="/blog/article/{{$article[0]->id}}/edit" class="btn btn-success btn-sm pull-right" role="button">Edit</a>
                     </p>
                     <hr>
-                    {!! $article[0]->content !!}
+                    {!! $article->content !!}
                     <hr>
 				 @endif
 				 <br><br><br>

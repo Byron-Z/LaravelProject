@@ -31,6 +31,12 @@ class User extends Authenticatable
         return $this->hasMany('App\Tag');
     }
     
+
+    public function userProfile()
+    {
+        return $this->hasOne('App\UserProfile');
+    }
+
     /**
      * The attributes excluded from the model's JSON form.
      *
