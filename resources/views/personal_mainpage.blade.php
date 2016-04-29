@@ -32,19 +32,22 @@
                     <a class="btn btn-primary" href="/blog/article?id={{$articles[$i]->id}}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
                     <hr>
                   @endfor
-                @endif
-                
                 
                 <!-- Pager -->
                 <ul class="pager">
                     <li class="previous">
-                        <a href="#">&larr; Older</a>
+                        @if($articles->currentPage() > 1)
+                        <a href="{{ $articles->previousPageUrl() }}">&larr; Previous</a>
+                        @endif
                     </li>
                     <li class="next">
-                        <a href="#">Newer &rarr;</a>
+                        @if($articles->hasMorePages())
+                        <a href="{{ $articles->nextPageUrl() }}">Next &rarr;</a>
+                        @endif
                     </li>
                 </ul>
 
+            @endif
             </div>
 
         </div>

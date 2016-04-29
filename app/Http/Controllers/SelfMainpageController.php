@@ -34,7 +34,7 @@ class SelfMainpageController extends ArticleBaseController
         if(Auth::check())
         {  
             //DB::enableQueryLog();
-            $articles = Article::where('article_uid', Auth::id())->orderBy('updated_at', 'desc')->take(3)->get();
+            $articles = Article::where('article_uid', Auth::id())->orderBy('updated_at', 'desc')->simplePaginate(3);
             $data = array();
             for ($i = 0; $i < count($articles); $i++) {
                 $maxLine = 6;
