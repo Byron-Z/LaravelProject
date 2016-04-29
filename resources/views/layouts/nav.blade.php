@@ -10,7 +10,7 @@
         <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
       </ul>
       
-      <form class="navbar-form navbar-left" role="search">
+      <!-- <form class="navbar-form navbar-left" role="search">
         <div class="input-group">
           <input type="text" class="form-control" placeholder="Search">
           <span class="input-group-btn">
@@ -19,7 +19,7 @@
             </button>
           </span>
         </div>
-      </form>
+      </form> -->
       
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Link</a></li>

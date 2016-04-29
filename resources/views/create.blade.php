@@ -61,10 +61,10 @@
           
           <div class="btn-toolbar" role="toolbar" aria-label="...">
             <div class="btn-group" role="group" aria-label="First">
-              <button type="button" class="btn btn-default" id="preview-function" data-toggle="modal" data-target="#previewModal">Preview</button>
+              <button type="button" class="btn btn-info" id="preview-function" data-toggle="modal" data-target="#previewModal">Preview</button>
             </div>
-            <div class="btn-group" role="group" aria-label="Second">
-              <input type="submit" value="Submit" class="btn btn-default">
+            <div class="btn-group pull-right" role="group" aria-label="Second">
+              <input type="submit" value="Submit" class="btn btn-info">
             </div>
           </div>
         </form>

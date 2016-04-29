@@ -17,14 +17,17 @@
                     </h2>
                     <p>
                         <span class="glyphicon glyphicon-time"></span> Posted on {{$article->created_at}}
+                        &nbsp;&nbsp;
                         <span class="glyphicon glyphicon-time"></span> Updated on {{$article->updated_at}}
                     </p>
                     <p>
                         <span class="glyphicon glyphicon-eye-open"></span> Read: {{$article->read_count}}
+                        &nbsp;&nbsp;
                         <span class="glyphicon glyphicon-comment"></span><a href="#"> Comments: {{$article->comment_count}}</a>
                     </p>
                     <hr>
-                    {!! $article->content !!}
+                    <!-- {!! $article->content !!} -->
+                    {!! Parsedown::instance()->text($article->content) !!}
                     <hr>
                     <a class="btn btn-primary" href="/blog/article?id={{$article->id}}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
                     <hr>
@@ -43,9 +46,6 @@
                 <hr>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, veritatis, tempora, necessitatibus inventore nisi quam quia repellat ut tempore laborum possimus eum dicta id animi corrupti debitis ipsum officiis rerum.</p>
                 <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a> -->
-
-                <hr>
-
 
                 <!-- Pager -->
                 <ul class="pager">

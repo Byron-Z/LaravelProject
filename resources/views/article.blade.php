@@ -19,7 +19,8 @@
                         <a href="/blog/article/{{$article->id}}/edit" class="btn btn-success btn-sm pull-right" role="button">Edit</a>
                     </p>
                     <hr>
-                    {!! $article->content !!}
+                    <!-- {!! $article->content !!} -->
+                    {!! Parsedown::instance()->text($article->content) !!}
                     <hr>
 				 @endif
 				 <br><br><br>

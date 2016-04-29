@@ -7,26 +7,27 @@
     @include('layouts.sidebar')
     <div class="col-md-9">
       @if (isset($article))
-      <form id="article-form" name="article-form" role="form" action="{{ url('/blog/article') }}" method="post">
+      <form id="article-form" name="article-form" role="form" action="/blog/{{$article->id}}/update" method="post">
         {!! csrf_field() !!}
         <div class="form-group">
           <label for="field">Title:</label>
           <div class="input-group">
             <div class="input-group-btn">
-              <button type="button" name="type" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select one... <span class="caret"></span></button>
-              <input type="hidden" name="article-type" id="article-type" value="{{$article->title}}">
+              <button type="button" name="type" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{$type}}<span class="caret"></span></button>
+              <input type="hidden" name="article-type" id="article-type" value="">
+              <input type="hidden" name="article-id" id="article-id" value="{{$article->id}}">
               <ul class="dropdown-menu">
                 <li><a href="#" data-value="Original">Original</a></li>
                 <li><a href="#" data-value="Reproduction">Reproduction</a></li>
                 <li><a href="#" data-value="Translation">Translation</a></li>
               </ul>
               </div><!-- /btn-group -->
-              <input type="text" name="title" placeholder="Enter your article title" class="form-control" id="article-title">
+              <input type="text" name="title" value="{{$article->title}}" class="form-control" id="article-title">
             </div>
           </div>
           <div class="form-group">
             <label for="field">Content:</label>
-            <textarea name="content" placeholder="Example Text" class="form-control" id="article-content" rows="25"></textarea>
+            <textarea name="content" class="form-control" id="article-content" rows="27">{{ $article->content }}</textarea>
           </div>
           <div class="form-group">
             <label for="field-4">Tags:</label>
@@ -35,7 +36,7 @@
                 <option value="">Select one...</option>
                 @if (isset($tags))
                   @foreach ($tags as $tag)
-                  <option value="{{$tag->name}}">{{$tag->name}}</option>
+                  <option value="{{$tag->name}}" selected="{{ ($tag->name != $tagUsed[0]->name) ? : "selected"}}">{{$tag->name}}</option>
                   @endforeach
                 @endif
               </select>
@@ -49,23 +50,23 @@
             <label for="field-3">Privilege:</label>
             <div>
               <label class="checkbox-inline">
-                <input type="checkbox" id="comment_permition" name="comment_permition" value="0"> Disable comment
+                <input type="checkbox" id="comment_permition" name="comment_permition" value="0" {{ ($article->comment_permition != 0) ? : "checked" }}> Disable comment
               </label>
               <label class="checkbox-inline">
-                <input type="checkbox" id="is_public" name="is_public" value="0"> Private
+                <input type="checkbox" id="is_public" name="is_public" value="0" {{ ($article->is_public != 0) ? : "checked" }}> Private
               </label>
               <label class="checkbox-inline">
-                <input type="checkbox" id="reproduct_permition" name="reproduct_permition" value="0"> Prohibit Reproduce
+                <input type="checkbox" id="reproduct_permition" name="reproduct_permition" value="0" {{ ($article->reproduct_permition != 0) ? : "checked" }}> Prohibit Reproduce
               </label>
             </div>
           </div>
           
           <div class="btn-toolbar" role="toolbar" aria-label="...">
             <div class="btn-group" role="group" aria-label="First">
-              <button type="button" class="btn btn-default" id="preview-function" data-toggle="modal" data-target="#previewModal">Preview</button>
+              <button type="button" class="btn btn-info" id="preview-function" data-toggle="modal" data-target="#previewModal">Preview</button>
             </div>
-            <div class="btn-group" role="group" aria-label="Second">
-              <input type="submit" value="Submit" class="btn btn-default">
+            <div class="btn-group pull-right" role="group" aria-label="Second">
+              <input type="submit" value="Submit" class="btn btn-info">
             </div>
           </div>
         @endif

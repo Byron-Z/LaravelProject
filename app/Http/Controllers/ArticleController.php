@@ -29,8 +29,10 @@ class ArticleController extends ArticleBaseController
     public function edit($id)
     {
         $article = Article::find($id);
-        $tags = $article->tags;
-        return view('edit', ['article' => $article, 'tags' => $tags, ]);
+        $tags = Tag::with(['user' => function ($query) {$query->where('id', Auth::id());}])->orderBy('count', 'desc')->orderBy('updated_at', 'desc')->get();
+        $tagUsed = $article->tags;
+        $type = ['Original', 'Reproduction', 'Translation'];
+        return view('edit', ['article' => $article, 'tags' => $tags, 'tagUsed' => $tagUsed, 'type' => $type[$article->type], ]);
     }
 
     public function preview(Request $request) 
@@ -49,26 +51,16 @@ class ArticleController extends ArticleBaseController
         ];
         $validator = Validator::make($request->input(), $rules);
         if ($validator->passes()) {
-            $resolved_content = Parsedown::instance()->text($request->input('content'));
+            //$resolved_content = Parsedown::instance()->text($request->input('content'));
             $article = Article::firstOrCreate([
                 'title' => $request->input('title'), 
                 'article_uid' => Auth::id(),
-                'content' => $resolved_content,
+                'content' => $request->input('content'),
                 'comment_permition' => $request->has('comment_permition') ? 0 : 1 ,
                 'is_public' => $request->has('is_public') ? 0 : 1 ,
                 'reproduct_permition' => $request->has('reproduct_permition') ? 0 : 1 ,
                 'type' => $request->has('article-type') ? $request->input('article-type') : 0 ,
             ]);
-
-            if (str_contains($resolved_content, '<p>')) {
-                $start = strpos($resolved_content, '<p>');
-                $length = strpos($resolved_content, '</p>') - $start - 3;
-                $summary = substr($resolved_content, $start + 3, $length);
-            } else if (str_contains($resolved_content, '</h')) {
-                $start = strpos($resolved_content, '<h');
-                $length = strpos($resolved_content, '</h') - $start - 4;
-                $summary = substr($resolved_content, $start + 4, $length);
-            }
 
             $tag = Tag::where('tag_uid', Auth::id())->where('name', $request->input('tags'))->first();
             if (isset($tag)) {
@@ -88,7 +80,7 @@ class ArticleController extends ArticleBaseController
         }
     }
 
-    public function update($id) 
+    public function update(Request $request) 
     {
         $rules = [
         'title'   => 'required|max:100',
@@ -97,11 +89,12 @@ class ArticleController extends ArticleBaseController
         ];
         $validator = Validator::make($request->input(), $rules);
         if ($validator->passes()) {
-            $resolved_content = Parsedown::instance()->text($request->input('content'));
-            $article = Article::where('id', $id)->update([
+            //$resolved_content = Parsedown::instance()->text($request->input('content'));
+            $article = Article::find($request->input('article-id'));
+            Article::where('id', $request->input('article-id'))->update([
                 'title' => $request->input('title'), 
                 'article_uid' => Auth::id(),
-                'content' => $resolved_content,
+                'content' => $request->input('content'),
                 'comment_permition' => $request->has('comment_permition') ? 0 : 1 ,
                 'is_public' => $request->has('is_public') ? 0 : 1 ,
                 'reproduct_permition' => $request->has('reproduct_permition') ? 0 : 1 ,
@@ -109,16 +102,13 @@ class ArticleController extends ArticleBaseController
             ]);
 
             $tag = Tag::where('tag_uid', Auth::id())->where('name', $request->input('tags'))->first();
-            if (isset($tag)) {
-                $tag->increment('count');
-            } else {
+            if (!isset($tag)) {
                 $tag = Tag::firstOrCreate([
                     'tag_uid' => Auth::id(),
                     'name' => $request->input('tags'),
                 ]);
+                $article->tags()->attach($tag->id);
             }
-
-            $article->tags()->updateExistingPivot($tag->id);
             
             return redirect()->action('SelfMainpageController@index');
         } else {
