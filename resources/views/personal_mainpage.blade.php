@@ -11,42 +11,30 @@
             <!-- Blog Entries Column -->
             <div class="col-md-9">
                 @if (isset($articles))
-                  @foreach ($articles as $article)
+                    @for ($i = 0; $i < count($articles); $i++)
                     <h2>
-                    <a href="#">{{$article->title}}</a>
+                    <a href="#">{{$articles[$i]->title}}</a>
                     </h2>
                     <p>
-                        <span class="glyphicon glyphicon-time"></span> Posted on {{$article->created_at}}
+                        <span class="glyphicon glyphicon-time"></span> Posted on {{$articles[$i]->created_at}}
                         &nbsp;&nbsp;
-                        <span class="glyphicon glyphicon-time"></span> Updated on {{$article->updated_at}}
+                        <span class="glyphicon glyphicon-time"></span> Updated on {{$articles[$i]->updated_at}}
                     </p>
                     <p>
-                        <span class="glyphicon glyphicon-eye-open"></span> Read: {{$article->read_count}}
+                        <span class="glyphicon glyphicon-eye-open"></span> Read: {{$articles[$i]->read_count}}
                         &nbsp;&nbsp;
-                        <span class="glyphicon glyphicon-comment"></span><a href="#"> Comments: {{$article->comment_count}}</a>
+                        <span class="glyphicon glyphicon-comment"></span><a href="#"> Comments: {{$articles[$i]->comment_count}}</a>
                     </p>
                     <hr>
-                    <!-- {!! $article->content !!} -->
-                    {!! Parsedown::instance()->text($article->content) !!}
+                    {!! $data[$i] !!}
+                    
                     <hr>
-                    <a class="btn btn-primary" href="/blog/article?id={{$article->id}}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+                    <a class="btn btn-primary" href="/blog/article?id={{$articles[$i]->id}}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
                     <hr>
-                  @endforeach
+                  @endfor
                 @endif
-                <!-- First Blog Post -->
-                <!-- <h2>
-                    <a href="#">Blog Post Title</a>
-                </h2>
-                <p class="lead">
-                    by <a href="index.php">Start Bootstrap</a>
-                </p>
-                <p><span class="glyphicon glyphicon-time"></span> Posted on August 28, 2013 at 10:00 PM</p>
-                <hr>
-                <img class="img-responsive" src="http://placehold.it/900x300" alt="">
-                <hr>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, veritatis, tempora, necessitatibus inventore nisi quam quia repellat ut tempore laborum possimus eum dicta id animi corrupti debitis ipsum officiis rerum.</p>
-                <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a> -->
-
+                
+                
                 <!-- Pager -->
                 <ul class="pager">
                     <li class="previous">

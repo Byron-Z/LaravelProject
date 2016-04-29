@@ -16,8 +16,12 @@
                         <span class="glyphicon glyphicon-time"></span> Updated on {{$article->updated_at}}
                         &nbsp;&nbsp;
                         <span class="glyphicon glyphicon-eye-open"></span> Read: {{$article->read_count}}
-                        <a href="/blog/article/{{$article->id}}/edit" class="btn btn-success btn-sm pull-right" role="button">Edit</a>
-                    </p>
+                        <span class="pull-right" role="group">
+                        	<a href="/blog/article/{{$article->id}}/edit" class="btn btn-success btn-sm" role="button">Edit</a>
+                        	<a href="/blog/article/{{$article->id}}/delete" class="btn btn-danger btn-sm" role="button">Delete</a>
+            			</span>
+<!--                         <a href="/blog/article/{{$article->id}}/edit" class="btn btn-success btn-sm pull-right" role="button">Edit</a>
+ -->                </p>
                     <hr>
                     <!-- {!! $article->content !!} -->
                     {!! Parsedown::instance()->text($article->content) !!}

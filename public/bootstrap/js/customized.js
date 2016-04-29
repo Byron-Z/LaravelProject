@@ -8,6 +8,11 @@ $(document).ready (function(){
 	$("#success-alert").hide();
 	$("#fail-alert").hide();
 
+    $(".profile-usermenu ul li a").click(function(){
+        $(".profile-usermenu ul li.active").removeClass("active");
+        $(this).parent().addClass("active");
+    });
+
 	$(".dropdown-menu li a").click(function(){
 	  $(this).parents(".input-group-btn").find('.btn').html($(this).text() + ' <span class="caret"></span>');
 	  $(this).parents(".input-group-btn").find('.btn').val($(this).data('value'));

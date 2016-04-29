@@ -22,8 +22,8 @@
 		<!-- SIDEBAR MENU -->
 		<div class="profile-usermenu">
 			<ul class="nav">
-				<li class="active">
-					<a href="#">
+				<li>
+					<a href="/blog">
 						<i class="glyphicon glyphicon-home"></i>
 					Latest Post </a>
 				</li>

@@ -13,6 +13,8 @@ use App\Tag;
 use DB;
 use Auth;
 use Validator;
+use Parsedown;
+use Illuminate\Support\Collection;
 
 class SelfMainpageController extends ArticleBaseController
 {
@@ -33,8 +35,26 @@ class SelfMainpageController extends ArticleBaseController
         {  
             //DB::enableQueryLog();
             $articles = Article::where('article_uid', Auth::id())->orderBy('updated_at', 'desc')->take(3)->get();
-            //dd(DB::getQueryLog());
-            return view('personal_mainpage', ['articles' => $articles, ]);
+            $data = array();
+            for ($i = 0; $i < count($articles); $i++) {
+                $maxLine = 6;
+                $pieces = explode("\r\n", $articles[$i]->content);
+                $lines = count($pieces);
+                $nowLine = 1;    
+                $linePos = 0;
+                $result = '';
+                while($nowLine <= $lines && $nowLine < $maxLine) {
+                    if (strlen($pieces[$linePos]) > 0) {
+                        $result = $result.$pieces[$linePos]."\r\n";
+                        $nowLine++;
+                    }
+                    $linePos++;
+                }
+                //$item = Collection::make($articles[$i]);
+                //$item->put('summary', Parsedown::instance()->text($result));
+                $data[$i] = Parsedown::instance()->text($result);
+            }
+            return view('personal_mainpage', ['articles' => $articles, 'data' => $data, ]);
         }
     }
 
@@ -43,7 +63,7 @@ class SelfMainpageController extends ArticleBaseController
     	if(Auth::check())
         {
 	        $article = Article::where('id', $request->input('id'))->get()->first();
-
+            //$article['resolved_content'] = Parsedown::instance()->text($article->content);
             event(new ArticleReadCount($article));
 
 	        return view('article', ['article' => $article, ]);
