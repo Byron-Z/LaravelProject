@@ -115,4 +115,17 @@ class ArticleController extends ArticleBaseController
             return redirect('/edit')->withInput()->withErrors($validator);
         }
     }
+
+    public function destory($id)
+    {
+        $article = Article::find($id)->get()->first();
+        foreach($article->tags as $tag){
+            $tag->count--;
+            $tag->save();
+            $article->tags()->detach($tag->id);
+        }
+        $article->delete();
+        return redirect()->action('SelfMainpageController@index');
+    }
+
 }
