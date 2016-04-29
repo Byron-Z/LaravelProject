@@ -16,14 +16,19 @@ use View;
 
 class ArticleBaseController extends Controller
 {
+    
+    protected $sidebarTags;
+    protected $recentPosts;
+    protected $userProfile;
+
     public function __construct()
     {
-        $sidebarTags = Tag::with(['user' => function ($query) {$query->where('id', Auth::id());}])->where('count', '>', '0')->orderBy('count', 'desc')->orderBy('updated_at', 'desc')->take(8)->get();
-        $recentPosts = Article::where('article_uid', Auth::id())->orderBy('created_at', 'desc')->take(3)->get();
-        $userProfile = UserProfile::where('user_id', Auth::id())->get()->first();
-    	
-    	View::share ( 'sidebarTags', $sidebarTags );
-       	View::share ( 'recentPosts', $recentPosts );
-       	View::share ( 'userProfile', $userProfile );
+        $this->sidebarTags = Tag::with(['user' => function ($query) {$query->where('id', Auth::id());}])->where('count', '>', '0')->orderBy('count', 'desc')->orderBy('updated_at', 'desc')->take(8)->get();
+        $this->recentPosts = Article::where('article_uid', Auth::id())->orderBy('created_at', 'desc')->take(3)->get();
+        $this->userProfile = UserProfile::where('user_id', Auth::id())->get()->first();
+
+    	View::share ( 'sidebarTags', $this->sidebarTags );
+       	View::share ( 'recentPosts', $this->recentPosts );
+       	View::share ( 'userProfile', $this->userProfile );
     }
 }

@@ -56,14 +56,14 @@ class SelfMainpageController extends ArticleBaseController
         {
             $reminder = "";
 
-            if($this->profile == null)
+            if($this->userProfile == null)
             {
                 $reminder = "You have not set profile yet!";
             } else{
                 $reminder = "Edit Personal Information";
             }
             
-            return view('profile',['tags' => $this->tags, 'reminder'=>$reminder, ]);
+            return view('profile',['reminder'=>$reminder, ]);
         }
     }
 
