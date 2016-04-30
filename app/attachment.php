@@ -13,7 +13,7 @@ class Attachment extends Model
      */
     protected $fillable = [
         'title', 'desc', 'size', 'extension',
-        'privilege', 'is_del', 'save_path', 'save_name',
+        'article_id', 'is_del', 'save_path', 'save_name',
         'url'
     ];
 

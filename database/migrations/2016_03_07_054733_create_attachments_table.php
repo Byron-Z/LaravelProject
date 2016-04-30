@@ -20,7 +20,7 @@ class CreateAttachmentsTable extends Migration
             //Attachment title
             $table->string('title');
             //Attachment description
-            $table->text('desc');
+            $table->text('desc')->nullable();
             //Attachment size
             $table->integer('size');
             //Attachment type
@@ -32,9 +32,9 @@ class CreateAttachmentsTable extends Migration
             //Attachment save path in server
             $table->string('save_path');
             //Attachment user defined name
-            $table->string('save_name');
+            $table->string('save_name')->nullable();
             //Attachment url
-            $table->string('url');
+            $table->string('url')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

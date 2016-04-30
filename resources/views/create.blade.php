@@ -6,7 +6,7 @@
     <!-- Sidebar -->
     @include('layouts.sidebar')
     <div class="col-md-9">
-      <form id="article-form" name="article-form" role="form" action="{{ url('/blog') }}" method="post">
+      <form id="article-form" name="article-form" role="form" action="{{ url('/blog') }}" method="post" enctype="multipart/form-data">
         {!! csrf_field() !!}
         <div class="form-group">
           <label for="field">Title:</label>
@@ -27,6 +27,12 @@
             <label for="field">Content:</label>
             <textarea name="content" placeholder="Example Text" class="form-control" id="article-content" rows="25"></textarea>
           </div>
+          
+          <div class="form-group">
+            <label for="field">Image upload:</label>
+            <input type="file" name="image" id="image">
+          </div>
+
           <div class="form-group">
             <label for="field-4">Tags:</label>
             <div class="input-group">

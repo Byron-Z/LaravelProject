@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use Parsedown;
 use Validator;
 use App\Article;
+use App\Attachment;
 use App\Tag;
 use DB;
 use Auth;
@@ -48,6 +49,7 @@ class ArticleController extends ArticleBaseController
         'title'   => 'required|max:100',
         'content' => 'required',
         'tags'    => 'required',
+        'image'   => 'mimes:jpg,jpeg,bmp,png|size:300',
         ];
         $validator = Validator::make($request->input(), $rules);
         if ($validator->passes()) {
@@ -73,9 +75,29 @@ class ArticleController extends ArticleBaseController
             }
 
             $article->tags()->attach($tag->id);
+
+            if ($request->hasFile('image')) {
+                
+                if ($request->file('image')->isValid()) {
+                    //dd($request->file('image');
+                    $destPath = '/home/vagrant/Code/Project/resources/uploads'; // upload path
+                    $extension = $request->file('image')->getClientOriginalExtension();
+                    $fileName = date('Y_m_d_H_i_s').'_'.rand(1,9999).'.'.$extension; // renameing image
+                    $request->file('image')->move($destPath, $fileName);
+                    $attachment = Attachment::firstOrCreate([
+                        'title' => $fileName, 
+                        'article_id' => $article->id,
+                        'size' => $request->file('image')->getClientSize(),
+                        'extension' => $extension,
+                        'save_path' => $destPath,
+                    ]);
+                    //dd($request->file('image')->getRealPath());
+                }
+            }
             
             return redirect()->action('SelfMainpageController@index');
         } else {
+            dd($validator->errors());
             return redirect('/create')->withInput()->withErrors($validator);
         }
     }
