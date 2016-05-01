@@ -23,6 +23,7 @@ class ArticleBaseController extends Controller
 
     public function __construct()
     {
+        $this->middleware('auth');
         $this->sidebarTags = Tag::with(['user' => function ($query) {$query->where('id', Auth::id());}])->where('count', '>', '0')->orderBy('count', 'desc')->orderBy('updated_at', 'desc')->take(8)->get();
         $this->recentPosts = Article::where('article_uid', Auth::id())->orderBy('created_at', 'desc')->take(3)->get();
         $this->userProfile = UserProfile::where('user_id', Auth::id())->get()->first();

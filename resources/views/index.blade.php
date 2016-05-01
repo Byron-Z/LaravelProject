@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Blog</title>
+		<title>Fancy Blog</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -18,10 +18,10 @@
 
 			<!-- Header -->
 				<header id="header" class="alt">
-					<h1><a href="index">Blog</h1>
+					<h1><a href="{{url('/')}}">F&B</h1>
 					<nav id="nav">
 						<ul>
-							<li><a href="{{ url('/home') }}">Home</a></li>
+							<li><a href="{{ url('/blog') }}">Home</a></li>
 							<li><a href="{{ url('/contact') }}">Contact</a></li>
 							@if (Auth::guest())
 							      <li><a href="register" class="button">Sign Up</a></li>
@@ -42,7 +42,7 @@
 
 			<!-- Banner -->
 				<section id="banner">
-					<h2>Blog</h2>
+					<h2>Fancy Blog</h2>
 					<p>A light weight and free Blog site for you.</p>
 					<ul class="actions">
 						<li><a href="{{ url('/login') }}" class="button">Sign in</a></li>

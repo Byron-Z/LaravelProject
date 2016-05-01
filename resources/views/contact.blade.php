@@ -18,11 +18,11 @@
 
 			<!-- Header -->
 				<header id="header">
-					<h1><a href="{{ url('/index') }}">Blog<a></h1>
+					<h1><a href="{{ url('/') }}">F&B<a></h1>
 					<nav id="nav">
 						<ul>
-							<li><a href="{{ url('/home') }}">Home</a></li>
-							<li><a href="{{ url('/contact') }}">Contact</a></li>
+							<li><a href="{{ url('/blank') }}">Home</a></li>
+							<li><a href="{{ url('/contact') }}">Contact Us</a></li>
 							@if (Auth::guest())
                                   <li><a href="{{ url('/register') }}" class="button">Sign Up</a></li>
                             @else

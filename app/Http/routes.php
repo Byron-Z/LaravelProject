@@ -33,18 +33,16 @@ Route::post('/profile', 'SelfMainpageController@saveProfile');
 | kernel and includes session state, CSRF protection, and more.
 |
 */
-Route::get('/index', function () {
-        return view('index');
-    });
-Route::get('/', function () {
-        return view('index');
-    });
+Route::get('/',function(){
+    return view('index');
+});
+Route::get('/blank', 'SelfMainpageController@redirectAfterLoginRegister');
     
 Route::get('/contact', function () {
     return view('contact',['msg'=>""]);
 });
 
-Route::post('/contact', 'HomeController@contactByUser');
+Route::post('/contact', 'SelfMainpageController@contactByUser');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

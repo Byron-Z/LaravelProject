@@ -15,6 +15,7 @@ use Auth;
 use Validator;
 use Parsedown;
 use Illuminate\Support\Collection;
+use Mail;
 
 class SelfMainpageController extends ArticleBaseController
 {
@@ -28,6 +29,27 @@ class SelfMainpageController extends ArticleBaseController
         $this->recentPosts = Article::where('article_uid', Auth::id())->orderBy('created_at', 'desc')->take(3)->get();
         $this->profile = UserProfile::where('user_id', Auth::id())->get()->first();
     }*/
+
+    public function redirectAfterLoginRegister()
+    {
+        return redirect()->action('SelfMainpageController@index');
+    }
+    public function contactByUser(Request $request){
+        $name = $request->input('name');
+        $email = $request->input('email');
+        $subject = $request->input('subject');
+        $msg = $request->input('message');
+
+
+       Mail::send('app_notification', ['name'=> $name, 'email'=>$email, 'subject'=>$subject, 'msg'=>$msg], function ($message){
+            $message->from('FancyBlog.app@gmail.com', 'FancyBlog');
+
+            $message->to('FancyBlog.app@gmail.com')->subject('User Feedback!');
+        });
+
+        return view('contact',['msg' => "Thanks for your feedback, we will get back you ASAP!!"]);
+    }
+
 
     public function index()
     {
@@ -111,29 +133,29 @@ class SelfMainpageController extends ArticleBaseController
             $validator1 = Validator::make($request->input(), $rules1);
             $validator2 = Validator::make($request->input(), $rules2);
 
-             if($this->profile != null){
+             if($this->userProfile != null){
                 if($validator2->passes()){
                     if($request->input('name') != ""){
-                        $this->profile->user->name = $request->input('name');
-                        $this->profile->user->save();
-                        echo $this->profile->user->name;
+                        $this->userProfile->user->name = $request->input('name');
+                        $this->userProfile->user->save();
+                        echo $this->userProfile->user->name;
                     }
                     if($request->input('sex') != ""){
-                        $this->profile->sex = $request->input('sex');
+                        $this->userProfile->sex = $request->input('sex');
                     }
                     if($request->input('country') != ""){
-                        $this->profile->country = $request->input('country');
+                        $this->userProfile->country = $request->input('country');
                     }
                     if($request->input('city') != ""){
-                        $this->profile->city = $request->input('city');
+                        $this->userProfile->city = $request->input('city');
                     }
                     if($request->input('phone') != ""){
-                        $this->profile->phone = $request->input('phone');
+                        $this->userProfile->phone = $request->input('phone');
                     }
                     if($request->input('description') != ""){
-                        $this->profile->description = $request->input('description');
+                        $this->userProfile->description = $request->input('description');
                     }
-                    $this->profile->save();
+                    $this->userProfile->save();
                 } else{
                     return redirect('/profile')->withInput()->withErrors($validator2);
                 }
