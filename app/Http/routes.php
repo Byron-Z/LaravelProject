@@ -26,6 +26,7 @@ Route::post('/profile', 'SelfMainpageController@saveProfile');
 Route::get('/test', 'ArticleController@test');
 Route::post('/blog/article/ajaxupload', 'ArticleController@ajaxUpload');
 Route::get('/storage/uploads/{id}/{filename}', 'ArticleController@getfile');
+Route::get('/tag', 'SelfMainpageController@gettag');
 /*
 |--------------------------------------------------------------------------
 | Application Routes

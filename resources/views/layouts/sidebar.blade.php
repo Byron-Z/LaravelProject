@@ -22,12 +22,12 @@
 		<!-- SIDEBAR MENU -->
 		<div class="profile-usermenu">
 			<ul class="nav">
-				<li>
-					<a href="/blog">
+				<li {!! Request::is('blog') ? 'class="active"' : '' !!}>
+					<a href="/blog" >
 						<i class="glyphicon glyphicon-home"></i>
 					Latest Post </a>
 				</li>
-				<li>
+				<li {!! Request::is('create') ? 'class="active"' : '' !!}>
 					<a href="{{url('create')}}">
 						<i class="glyphicon glyphicon-user"></i>
 					Write Blog </a>
@@ -81,7 +81,7 @@
             @foreach ($sidebarTags as $sidebarTag)
             <div class="row">
 				<div class="col-lg-6">
-					<a href="#">{{$sidebarTag->name}}</a>
+					<a href="/tag?{{$sidebarTag->id}}">{{$sidebarTag->name}}</a>
 				</div>
 				<div class="col-lg-3"></div>
 				<div class="col-lg-3"><span class="badge">{{$sidebarTag->count}}</span></div>

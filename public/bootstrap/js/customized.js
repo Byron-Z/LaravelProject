@@ -8,11 +8,6 @@ $(document).ready (function(){
 	$("#success-alert").hide();
 	$("#fail-alert").hide();
 
-    $(".profile-usermenu ul li a").click(function(){
-        $(".profile-usermenu ul li.active").removeClass("active");
-        $(this).parent().addClass("active");
-    });
-
 	$(".dropdown-menu li a").click(function(){
 	  $(this).parents(".input-group-btn").find('.btn').html($(this).text() + ' <span class="caret"></span>');
 	  $(this).parents(".input-group-btn").find('.btn').val($(this).data('value'));
@@ -35,6 +30,20 @@ $(document).ready (function(){
         minHeight: null,             // set minimum height of editor
         maxHeight: null,             // set maximum height of editor
         maximumImageFileSize: 10240,
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'italic', 'underline', 'clear']],
+            // ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
+            ['fontname', ['fontname']],
+            ['fontsize', ['fontsize']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['height', ['height']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'hr']],
+            ['view', ['fullscreen', /*'codeview'*/]],
+            ['help', ['help']]
+          ],
         callbacks: {
             onImageUpload: function(files, editor, welEditable) {
                 // upload image to server and create imgNode...
@@ -86,7 +95,4 @@ $(document).ready (function(){
         $('#tags-selector').val($('#tag-input').val());
     });
 
-    /*$('#article-submit').click(function() {
-        $('textarea[name="article-content"]').html($('#summernote').summernote('code'));
-    });*/
 });
