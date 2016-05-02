@@ -67,7 +67,7 @@
 	<!-- Blog Tags Well -->
 	<div class="well">
 		<h4>Blog Tags</h4>
-		<!-- <ul class="list-group">
+<!-- 		<ul class="list-group">
 			@if (isset($tags))
                 @foreach ($tags as $tag)
   				<li class="list-group-item">
@@ -96,7 +96,7 @@
 	
 		@foreach ($recentPosts as $post)
 		<div class="row">
-				<div class="col-lg-3">
+				<div class="col-lg-10">
 					<a href="/blog/article?id={{$post->id}}">{{$post->title}}</a>
 				</div>
 				<div class="col-lg-9">{{$post->created_at}}</div>

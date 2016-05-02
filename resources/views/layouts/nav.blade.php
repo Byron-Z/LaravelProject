@@ -32,7 +32,7 @@
             <li><a href="#" class="fa fa-cogs">  Setting</a></li>
             <li><a href="#" class="fa fa-bell">  Notifications</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#" class="fa fa-sign-out">  Log Out</a></li>
+            <li><a href="{{ url('/logout') }}" class="fa fa-sign-out">  Log Out</a></li>
           </ul>
         </li>
       </ul>

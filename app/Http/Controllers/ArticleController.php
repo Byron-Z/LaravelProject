@@ -84,6 +84,7 @@ class ArticleController extends ArticleBaseController
                 $tag = Tag::firstOrCreate([
                     'tag_uid' => Auth::id(),
                     'name' => $request->input('tags'),
+                    'count' => 1,
                 ]);
             }
 

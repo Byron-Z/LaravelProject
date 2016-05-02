@@ -24,6 +24,7 @@ class CreateUserProfilesTable extends Migration
             //$table->dateTime('create_time');
             $table->dateTime('last_login_time');
             $table->dateTime('last_post_time');
+            $table->string('portrait');
             $table->rememberToken();
             $table->timestamps();
         });

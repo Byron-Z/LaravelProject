@@ -10,7 +10,7 @@
 
             <!-- Blog Entries Column -->
             <div class="col-md-9">
-            <form method="post" action={{url('/profile')}} >
+            <form method="post" action="{{url('/profile')}}" enctype="multipart/form-data" >
             	{!! csrf_field() !!}
             	<div class="row">
 	            	<div class="col-md-4"></div>
@@ -26,9 +26,11 @@
 	       		<div class="row">
 		       		<div class="col-lg-5"></div>
 		       			<div class="col-lg-4">
-		            		<span class="image featured"><img src="images/blog19.jpg" height="200" width="200" alt="" /></span>
+
+
+		            		<span class="image featured"><img src={{($userProfile==null)? "images/blog19.jpg" : $userProfile->portrait}} height="200" width="200" alt="" /></span>
 		            			<label class="control-label"></label>
-		            			<input id="image" type="file" class="manual-file-chooser js-manual-file-chooser js-avatar-field">		      	
+		            			<input id="image" type="file" name="image" class="manual-file-chooser js-manual-file-chooser js-avatar-field">		      	
 		            	</div>
             	</div>
             	<br><br>

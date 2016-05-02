@@ -8,6 +8,7 @@ use App\Http\Requests;
 
 use App\Article;
 use App\UserProfile;
+use App\User;
 use App\Events\ArticleReadCount;
 use App\Tag;
 use DB;
@@ -135,10 +136,21 @@ class SelfMainpageController extends ArticleBaseController
 
              if($this->userProfile != null){
                 if($validator2->passes()){
+                    if ($request->hasFile('image')) {
+                        if ($request->file('image')->isValid()) {
+                            //dd($request->file('image');
+                            $destPath = '/home/vagrant/Code/Project/LaravelProject/public/storage/uploads/'.Auth::id(); // upload path
+                            $extension = $request->file('image')->getClientOriginalExtension();
+                            $fileName = date('Y_m_d_H_i_s').'_'.rand(1,9999).'.'.$extension; // renameing image
+                            $request->file('image')->move($destPath, $fileName);
+                            $this->userProfile->portrait = 'storage/uploads/'.Auth::id().'/'.$fileName;
+                            //dd($request->file('image')->getRealPath());
+                        }
+                    }
+
                     if($request->input('name') != ""){
                         $this->userProfile->user->name = $request->input('name');
                         $this->userProfile->user->save();
-                        echo $this->userProfile->user->name;
                     }
                     if($request->input('sex') != ""){
                         $this->userProfile->sex = $request->input('sex');
@@ -161,6 +173,18 @@ class SelfMainpageController extends ArticleBaseController
                 }
             } else{
                 if ($validator1->passes()) {
+                    $destPath = "";
+                    $fileName = "";
+                    if ($request->hasFile('image')) {
+                        if ($request->file('image')->isValid()) {
+                            //dd($request->file('image');
+                            $destPath = '/home/vagrant/Code/Project/LaravelProject/public/storage/uploads/'.Auth::id(); // upload path
+                            $extension = $request->file('image')->getClientOriginalExtension();
+                            $fileName = date('Y_m_d_H_i_s').'_'.rand(1,9999).'.'.$extension; // renameing image
+                            $request->file('image')->move($destPath, $fileName);
+                            //dd($request->file('image')->getRealPath());
+                        }
+                    }
                     UserProfile::create([
                     'user_id' => Auth::id(),
                     'phone' => $request->input('phone'),
@@ -168,6 +192,7 @@ class SelfMainpageController extends ArticleBaseController
                     'city' => $request->input('city'),
                     'country' => $request->input('country'),
                     'description' => $request->input('description'),
+                    'portrait' => 'storage/uploads/'.Auth::id().'/'.$fileName,
                     ]);
                     
                     $user = User::where('id', Auth::id())->get()->first();
