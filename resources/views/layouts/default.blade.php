@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 
 <html>
 	<head>
@@ -21,6 +21,14 @@
     	<style>
     		body { padding-top: 70px; }
     	</style>
+    	<!-- Scripts -->
+		<script src="{{ URL::asset('bootstrap/js/jquery.min.js') }}"></script>
+		<script src="{{ URL::asset('bootstrap/js/bootstrap.min.js') }}"></script>
+		<!-- include summernote css/js-->
+		<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.css" rel="stylesheet">
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.js"></script>
+		
+		<script src="{{ URL::asset('bootstrap/js/customized.js') }}"></script>
 	</head>
 	<body>
 		@include('layouts.nav')
@@ -29,10 +37,5 @@
 
 		<hr>
 		@include('layouts.footer')
-
-	<!-- Scripts -->
-		<script src="{{ URL::asset('bootstrap/js/jquery.min.js') }}"></script>
-		<script src="{{ URL::asset('bootstrap/js/bootstrap.min.js') }}"></script>
-		<script src="{{ URL::asset('bootstrap/js/customized.js') }}"></script>
 	</body>
 </html>

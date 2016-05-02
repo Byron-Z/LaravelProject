@@ -36,28 +36,41 @@ class ArticleController extends ArticleBaseController
         return view('edit', ['article' => $article, 'tags' => $tags, 'tagUsed' => $tagUsed, 'type' => $type[$article->type], ]);
     }
 
-    public function preview(Request $request) 
+/*    public function preview(Request $request) 
     {
         if ($request->has('content')) {
     		return Parsedown::instance()->text($request->input('content'));
     	}
-	}
+	}*/
+
+    public function ajaxUpload(Request $request) 
+    {
+        if (isset($request->file)) {
+            $destPath = 'storage/uploads/'.Auth::id().'/'; // upload path
+            $extension = $request->file->getClientOriginalExtension();
+            $fileName = date('Y_m_d_H_i_s').'_'.rand(1,9999).'.'.$extension; // renameing image
+            $request->file->move($destPath, $fileName);
+            return asset($destPath.$fileName);
+        } 
+    }
+
+    public function getfile($id, $filename) {
+        return response()->file('storage/uploads/'.Auth::id().'/'.$filename);
+    }
 
     public function store(Request $request) 
     {
         $rules = [
         'title'   => 'required|max:100',
-        'content' => 'required',
+        'summernote' => 'required',
         'tags'    => 'required',
-        'image'   => 'mimes:jpg,jpeg,bmp,png|size:300',
         ];
         $validator = Validator::make($request->input(), $rules);
         if ($validator->passes()) {
-            //$resolved_content = Parsedown::instance()->text($request->input('content'));
             $article = Article::firstOrCreate([
                 'title' => $request->input('title'), 
                 'article_uid' => Auth::id(),
-                'content' => $request->input('content'),
+                'content' => $request->input('summernote'),
                 'comment_permition' => $request->has('comment_permition') ? 0 : 1 ,
                 'is_public' => $request->has('is_public') ? 0 : 1 ,
                 'reproduct_permition' => $request->has('reproduct_permition') ? 0 : 1 ,
@@ -76,11 +89,10 @@ class ArticleController extends ArticleBaseController
 
             $article->tags()->attach($tag->id);
 
-            if ($request->hasFile('image')) {
-                
+            /*if ($request->hasFile('image')) {
                 if ($request->file('image')->isValid()) {
                     //dd($request->file('image');
-                    $destPath = '/home/vagrant/Code/Project/resources/uploads'; // upload path
+                    $destPath = '/home/vagrant/Code/Project/resources/uploads/'.Auth::id(); // upload path
                     $extension = $request->file('image')->getClientOriginalExtension();
                     $fileName = date('Y_m_d_H_i_s').'_'.rand(1,9999).'.'.$extension; // renameing image
                     $request->file('image')->move($destPath, $fileName);
@@ -93,7 +105,7 @@ class ArticleController extends ArticleBaseController
                     ]);
                     //dd($request->file('image')->getRealPath());
                 }
-            }
+            }*/
             
             return redirect()->action('SelfMainpageController@index');
         } else {
@@ -106,7 +118,7 @@ class ArticleController extends ArticleBaseController
     {
         $rules = [
         'title'   => 'required|max:100',
-        'content' => 'required',
+        'summernote' => 'required',
         'tags'    => 'required',
         ];
         $validator = Validator::make($request->input(), $rules);
@@ -116,7 +128,7 @@ class ArticleController extends ArticleBaseController
             Article::where('id', $request->input('article-id'))->update([
                 'title' => $request->input('title'), 
                 'article_uid' => Auth::id(),
-                'content' => $request->input('content'),
+                'content' => $request->input('summernote'),
                 'comment_permition' => $request->has('comment_permition') ? 0 : 1 ,
                 'is_public' => $request->has('is_public') ? 0 : 1 ,
                 'reproduct_permition' => $request->has('reproduct_permition') ? 0 : 1 ,

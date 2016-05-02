@@ -13,7 +13,7 @@
 
 
 Route::get('/blog', 'SelfMainpageController@index');
-Route::post('/create/preview', 'ArticleController@preview');
+//Route::post('/create/preview', 'ArticleController@preview');
 Route::get('/create', 'ArticleController@create');
 Route::post('/blog', 'ArticleController@store');
 Route::post('/blog/{id}/update', 'ArticleController@update');
@@ -23,6 +23,9 @@ Route::get('/blog/article/{id}/delete', 'ArticleController@destory');
 Route::get('/blog/article', 'SelfMainpageController@readMore')->middleware('articleReadThrottle');
 Route::get('/profile', 'SelfMainpageController@showProfile');
 Route::post('/profile', 'SelfMainpageController@saveProfile');
+Route::get('/test', 'ArticleController@test');
+Route::post('/blog/article/ajaxupload', 'ArticleController@ajaxUpload');
+Route::get('/storage/uploads/{id}/{filename}', 'ArticleController@getfile');
 /*
 |--------------------------------------------------------------------------
 | Application Routes

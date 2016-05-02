@@ -13,7 +13,7 @@
           <div class="input-group">
             <div class="input-group-btn">
               <button type="button" name="type" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select one... <span class="caret"></span></button>
-              <input type="hidden" name="article-type" id="article-type" value="">
+              <input type="hidden" name="article-type" id="article-type" value="0">
               <ul class="dropdown-menu">
                 <li><a href="#" data-value="Original">Original</a></li>
                 <li><a href="#" data-value="Reproduction">Reproduction</a></li>
@@ -25,12 +25,7 @@
           </div>
           <div class="form-group">
             <label for="field">Content:</label>
-            <textarea name="content" placeholder="Example Text" class="form-control" id="article-content" rows="25"></textarea>
-          </div>
-          
-          <div class="form-group">
-            <label for="field">Image upload:</label>
-            <input type="file" name="image" id="image">
+            <textarea name="summernote" class="form-control" id="summernote"></textarea>
           </div>
 
           <div class="form-group">
@@ -70,7 +65,7 @@
               <button type="button" class="btn btn-info" id="preview-function" data-toggle="modal" data-target="#previewModal">Preview</button>
             </div>
             <div class="btn-group pull-right" role="group" aria-label="Second">
-              <input type="submit" value="Submit" class="btn btn-info">
+              <input type="submit" value="Submit" class="btn btn-info" id="article-submit">
             </div>
           </div>
         </form>

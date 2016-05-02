@@ -27,7 +27,13 @@
           </div>
           <div class="form-group">
             <label for="field">Content:</label>
-            <textarea name="content" class="form-control" id="article-content" rows="27">{{ $article->content }}</textarea>
+            <!-- <div id="summernote"></div> -->
+            <textarea name="summernote" class="form-control" id="summernote"></textarea>
+            <script>
+              $(document).ready(function() {
+                  $('#summernote').summernote('code', '{!! $article->content !!}');
+              })
+            </script>
           </div>
           <div class="form-group">
             <label for="field-4">Tags:</label>
