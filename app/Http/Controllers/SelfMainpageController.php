@@ -115,6 +115,7 @@ class SelfMainpageController extends ArticleBaseController
         if(Auth::check())
         {
             $rules1 = [
+            'image' => 'required',
             'name'   => 'required|max:100',
             'sex' => 'required',
             'country'    => 'required| max:20| min:2',

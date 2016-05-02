@@ -21,13 +21,11 @@
             	<br>  	
             	<div class="row">
 	            	<div class="col-lg-1"></div>
-	       			<div class="col-lg-3"><h4>Upload portrait here</h4></div>
+	       			<div class="col-lg-3"><h4>Upload portrait here *</h4></div>
 	       		</div>
 	       		<div class="row">
 		       		<div class="col-lg-5"></div>
 		       			<div class="col-lg-4">
-
-
 		            		<span class="image featured"><img src={{($userProfile==null)? "images/blog19.jpg" : $userProfile->portrait}} height="200" width="200" alt="" /></span>
 		            			<label class="control-label"></label>
 		            			<input id="image" type="file" name="image" class="manual-file-chooser js-manual-file-chooser js-avatar-field">		      	
@@ -37,7 +35,7 @@
            
             	<div class="row">
             		<div class="col-lg-1"></div>
-	       			<div class="col-lg-3"><h4>Name</h4></div>
+	       			<div class="col-lg-3"><h4>Name *</h4></div>
 	       			<div class="col-lg-4">
 	       				<div class="form-group">
 	       					<label class="sr-only" for="Name">Name</label>
@@ -49,12 +47,13 @@
 	       					@endif		
 	       				</div>
 	       			</div>
+	       			<!-- <div class="col-lg-1"><h4>*<h4></div> -->
             	</div>
             	
             	<br>
             	<div class="row">
             		<div class="col-lg-1"></div>
-	       			<div class="col-lg-3"><h4>Sex</h4></div>
+	       			<div class="col-lg-3"><h4>Sex *</h4></div>
 	       			<div class="col-lg-5">
 	       				<div class="radio">
 	       					<label class="radio-inline">
@@ -70,7 +69,7 @@
             	<br>
             	<div class="row">
             		<div class="col-lg-1"></div>
-	       			<div class="col-lg-3"><h4>Location</h4></div>
+	       			<div class="col-lg-3"><h4>Location *</h4></div>
 	       			<div class="col-lg-4">
 	       				<div class="form-group">
 		       				<label for="Location">Country</label>
@@ -91,12 +90,13 @@
 		       				@endif
 	       				</div>
 	       			</div>
+
             	</div>
 
             	<br>
             	<div class="row">
             		<div class="col-lg-1"></div>
-	       			<div class="col-lg-3"><h4>Phone Number</h4></div>
+	       			<div class="col-lg-3"><h4>Phone Number *</h4></div>
 	       			<div class="col-lg-4">
 	       				<div class="form-group">
 		       				<label class="sr-only" for="Phone Number">Phone Number</label>
@@ -108,12 +108,13 @@
 		       				@endif
 	       				</div>	       							
 	       			</div>
+	       			<!-- <div class="col-lg-1"><h4>*<h4></div> -->
             	</div>
 
             	<br>
             	<div class="row">
             		<div class="col-lg-1"></div>
-	       			<div class="col-lg-3"><h4>Description</h4></div>
+	       			<div class="col-lg-3"><h4>Description *</h4></div>
 	       			<div class="col-lg-6">
 	       				<div class="form-group">
 		       				<label class="sr-only" for="Description">Description</label>
@@ -125,6 +126,7 @@
 		       				@endif
 		       			</div>		
 	       			</div>
+	       			<!-- <div class="col-lg-1"><h4>*<h4></div> -->
             	</div>
 
             	<div class="row">

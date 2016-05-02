@@ -99,8 +99,7 @@
 				<div class="col-lg-10">
 					<a href="/blog/article?id={{$post->id}}">{{$post->title}}</a>
 				</div>
-				<div class="col-lg-9">{{$post->created_at}}</div>
-				<br><br>
+				<br>
 		</div>
 		@endforeach
 	
