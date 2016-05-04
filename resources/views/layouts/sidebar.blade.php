@@ -3,7 +3,7 @@
 	<div class="well">
 		<!-- SIDEBAR USERPIC -->
 		<div class="profile-userpic">
-			<img src="" class="img-responsive" alt="">
+			<img src={{($userProfile==null)? URL::asset("images/blog19.jpg") : URL::asset($userProfile->portrait)}} height="20" width="20" class="img-responsive" alt="">
 		</div>
 		<!-- END SIDEBAR USERPIC -->
 		<!-- SIDEBAR USER TITLE -->
@@ -38,7 +38,7 @@
 					Archives </a>
 				</li>
 				<li>
-					<a href="#">
+					<a href="{{url('/profile')}}">
 						<i class="glyphicon glyphicon-flag"></i>
 					About Me </a>
 				</li>
@@ -52,18 +52,21 @@
 		<!-- END MENU -->
 	</div>
 	<!-- Blog Search Well -->
+	<form method="post" action="{{ url('/search')}}">
+	{!! csrf_field() !!}
 	<div class="well">
 		<h4>Blog Search</h4>
 		<div class="input-group">
-			<input type="text" class="form-control">
+			<input type="text" name="search" class="form-control" >
 			<span class="input-group-btn">
-				<button class="btn btn-default" type="button">
+				<button class="btn btn-default" type="submit">
 				<span class="glyphicon glyphicon-search"></span>
 				</button>
 			</span>
 		</div>
 		<!-- /.input-group -->
 	</div>
+	</form>
 	<!-- Blog Tags Well -->
 	<div class="well">
 		<h4>Blog Tags</h4>

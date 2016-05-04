@@ -26,7 +26,7 @@
 	       		<div class="row">
 		       		<div class="col-lg-5"></div>
 		       			<div class="col-lg-4">
-		            		<span class="image featured"><img src={{($userProfile==null)? "images/blog19.jpg" : $userProfile->portrait}} height="200" width="200" alt="" /></span>
+		            		<span class="image featured"><img src={{($userProfile==null)? URL::asset("images/blog19.jpg") : URL::asset($userProfile->portrait)}} height="200" width="200" alt="" /></span>
 		            			<label class="control-label"></label>
 		            			<input id="image" type="file" name="image" class="manual-file-chooser js-manual-file-chooser js-avatar-field">		      	
 		            	</div>

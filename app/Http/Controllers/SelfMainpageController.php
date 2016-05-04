@@ -55,31 +55,48 @@ class SelfMainpageController extends ArticleBaseController
     public function index()
     {
         if(Auth::check())
-        {  
-            //DB::enableQueryLog();
+        {
             $articles = Article::where('article_uid', Auth::id())->orderBy('updated_at', 'desc')->simplePaginate(3);
-            $data = array();
-            for ($i = 0; $i < count($articles); $i++) {
-                $maxLine = 6;
-                $pieces = explode("\r\n", $articles[$i]->content);
-                $lines = count($pieces);
-                $nowLine = 1;    
-                $linePos = 0;
-                $result = '';
-                while($nowLine <= $lines && $nowLine < $maxLine) {
-                    if (strlen($pieces[$linePos]) > 0) {
-                        $result = $result.$pieces[$linePos]."\r\n";
-                        $nowLine++;
-                    }
-                    $linePos++;
-                }
-                //$item = Collection::make($articles[$i]);
-                //$item->put('summary', Parsedown::instance()->text($result));
-                $data[$i] = Parsedown::instance()->text($result);
-            }
-            return view('personal_mainpage', ['articles' => $articles, 'data' => $data, ]);
+            return $this->base($articles);
         }
     }
+
+    // function base is used by index() and search() and archives() 
+    private function base($articles)
+    {   
+        //DB::enableQueryLog();
+        $data = array();
+        for ($i = 0; $i < count($articles); $i++) {
+            $maxLine = 6;
+            $pieces = explode("\r\n", $articles[$i]->content);
+            $lines = count($pieces);
+            $nowLine = 1;    
+            $linePos = 0;
+            $result = '';
+            while($nowLine <= $lines && $nowLine < $maxLine) {
+                if (strlen($pieces[$linePos]) > 0) {
+                    $result = $result.$pieces[$linePos]."\r\n";
+                    $nowLine++;
+                }
+                $linePos++;
+            }
+                //$item = Collection::make($articles[$i]);
+            //$item->put('summary', Parsedown::instance()->text($result));
+            $data[$i] = Parsedown::instance()->text($result);
+        }
+        return view('personal_mainpage', ['articles' => $articles, 'data' => $data, ]);
+    }
+    
+    public function search(Request $request)
+    {
+        $articles = Article::where('title', $request->input('search'))->orderBy('updated_at', 'desc')->simplePaginate(3);
+        if($articles == null || count($articles) == 0){
+            return view('not_found');
+        } else{
+            return $this->base($articles);
+        }
+    }
+
 
     public function readMore(Request $request)
     {
