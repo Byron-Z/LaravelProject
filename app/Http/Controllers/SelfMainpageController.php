@@ -61,6 +61,16 @@ class SelfMainpageController extends ArticleBaseController
         }
     }
 
+
+    public function archives()
+    {
+         if(Auth::check())
+        {
+            $articles = Article::where('article_uid', Auth::id())->orderBy('updated_at', 'desc')->paginate(15);
+            return $this->base($articles);
+        }
+    }
+
     // function base is used by index() and search() and archives() 
     private function base($articles)
     {   
@@ -98,6 +108,8 @@ class SelfMainpageController extends ArticleBaseController
     }
 
 
+
+
     public function readMore(Request $request)
     {
     	if(Auth::check())
@@ -127,24 +139,23 @@ class SelfMainpageController extends ArticleBaseController
         }
     }
 
+
     public function saveProfile(Request $request)
     {
         if(Auth::check())
         {
             $rules1 = [
-            'image' => 'required',
             'name'   => 'required|max:100',
-            'sex' => 'required',
-            'country'    => 'required| max:20| min:2',
-            'city' => 'required| max:20 | min:2',
+            'country'    => 'required|max:20',
+            'city' => 'required|max:20 ',
             'phone'=>'required|regex:/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/',
             'description' => 'required|max:200',
             ];
 
             $rules2 = [
             'name'   => 'max:100',
-            'country'    => 'max:20| min:2',
-            'city' => 'max:20 | min:2',
+            'country'    => 'max:20|min:2',
+            'city' => 'max:20 |min:2',
             'phone'=>'regex:/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/',
             'description' => 'max:200',
             ];
@@ -170,8 +181,8 @@ class SelfMainpageController extends ArticleBaseController
                         $this->userProfile->user->name = $request->input('name');
                         $this->userProfile->user->save();
                     }
-                    if($request->input('sex') != ""){
-                        $this->userProfile->sex = $request->input('sex');
+                    if($request->input('gender') != ""){
+                        $this->userProfile->gender = $request->input('gender');
                     }
                     if($request->input('country') != ""){
                         $this->userProfile->country = $request->input('country');
@@ -187,6 +198,7 @@ class SelfMainpageController extends ArticleBaseController
                     }
                     $this->userProfile->save();
                 } else{
+                    return "Hello!!1";
                     return redirect('/profile')->withInput()->withErrors($validator2);
                 }
             } else{
@@ -206,7 +218,7 @@ class SelfMainpageController extends ArticleBaseController
                     UserProfile::create([
                     'user_id' => Auth::id(),
                     'phone' => $request->input('phone'),
-                    'sex' => $request->input('sex'),
+                    'gender' => $request->input('gender'),
                     'city' => $request->input('city'),
                     'country' => $request->input('country'),
                     'description' => $request->input('description'),
@@ -217,10 +229,12 @@ class SelfMainpageController extends ArticleBaseController
                     $user->name = ($request->input('name') == "") ? $user->name : $request->input('name');
 
                 } else{
+                    return "hello!!!!";
                     return redirect('/profile')->withInput()->withErrors($validator1);
                 }
 
             }
+
             return redirect()->action('SelfMainpageController@showProfile');
         }
     }

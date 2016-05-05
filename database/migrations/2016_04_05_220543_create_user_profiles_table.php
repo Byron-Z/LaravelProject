@@ -17,7 +17,7 @@ class CreateUserProfilesTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->string('phone');
-            $table->enum('sex', ['male', 'female']);
+            $table->enum('gender', ['male', 'female']);
             $table->string('city');
             $table->string('country');
             $table->string('description');

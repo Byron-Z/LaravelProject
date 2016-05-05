@@ -17,7 +17,7 @@ class CreateArticlesTable extends Migration
             //Article ID
             $table->increments('id');
             //Article title
-            $table->string('title')->unique();
+            $table->string('title');
             //Creator of this article
             $table->integer('article_uid')-> unsigned();
             //Article content

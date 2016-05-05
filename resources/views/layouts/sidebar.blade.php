@@ -3,7 +3,7 @@
 	<div class="well">
 		<!-- SIDEBAR USERPIC -->
 		<div class="profile-userpic">
-			<img src={{($userProfile==null)? URL::asset("images/blog19.jpg") : URL::asset($userProfile->portrait)}} height="20" width="20" class="img-responsive" alt="">
+			<img src={{($userProfile==null || $userProfile->portrait=="")? URL::asset("images/blog19.jpg") : URL::asset($userProfile->portrait)}} height="20" width="20" class="img-responsive" alt="">
 		</div>
 		<!-- END SIDEBAR USERPIC -->
 		<!-- SIDEBAR USER TITLE -->
@@ -33,7 +33,7 @@
 					Write Blog </a>
 				</li>
 				<li>
-					<a href="#" target="_blank">
+					<a href="{{url('/archives')}}" target="_blank">
 						<i class="glyphicon glyphicon-ok"></i>
 					Archives </a>
 				</li>

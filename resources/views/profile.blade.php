@@ -26,7 +26,7 @@
 	       		<div class="row">
 		       		<div class="col-lg-5"></div>
 		       			<div class="col-lg-4">
-		            		<span class="image featured"><img src={{($userProfile==null)? URL::asset("images/blog19.jpg") : URL::asset($userProfile->portrait)}} height="200" width="200" alt="" /></span>
+		            		<span class="image featured"><img src={{($userProfile==null || $userProfile->portrait=="")? URL::asset("images/blog19.jpg") : URL::asset($userProfile->portrait)}} height="200" width="200" alt="" /></span>
 		            			<label class="control-label"></label>
 		            			<input id="image" type="file" name="image" class="manual-file-chooser js-manual-file-chooser js-avatar-field">		      	
 		            	</div>
@@ -53,14 +53,14 @@
             	<br>
             	<div class="row">
             		<div class="col-lg-1"></div>
-	       			<div class="col-lg-3"><h4>Sex *</h4></div>
+	       			<div class="col-lg-3"><h4>Gender *</h4></div>
 	       			<div class="col-lg-5">
 	       				<div class="radio">
 	       					<label class="radio-inline">
-	       					  <input type="radio" name="sex" value="male" checked= {{ ($userProfile==null || $userProfile->sex =="female") ? "false" : "true" }}> male
+	       					  <input type="radio" name="gender" value="male" checked= {{ ($userProfile==null || $userProfile->gender =="female") ? "false" : "true" }}> male
 	       					</label>
 	       					<label class="radio-inline">
-	       					  <input type="radio" name="sex" value="female" checked = {{ ($userProfile!=null && $userProfile->sex =="male") ? "false" : "true"  }}> female
+	       					  <input type="radio" name="gender" value="female" checked = {{ ($userProfile!=null && $userProfile->gender =="male") ? "false" : "true"  }}> female
 	       					</label>
 	       				</div>
 	       			</div>
