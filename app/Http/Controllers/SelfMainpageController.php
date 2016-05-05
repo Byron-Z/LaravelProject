@@ -229,7 +229,6 @@ class SelfMainpageController extends ArticleBaseController
                     $user->name = ($request->input('name') == "") ? $user->name : $request->input('name');
 
                 } else{
-                    return "hello!!!!";
                     return redirect('/profile')->withInput()->withErrors($validator1);
                 }
 
