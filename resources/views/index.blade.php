@@ -44,10 +44,12 @@
 				<section id="banner">
 					<h2>Fancy Blog</h2>
 					<p>A light weight and free Blog site for you.</p>
+					@if (Auth::guest())
 					<ul class="actions">
 						<li><a href="{{ url('/login') }}" class="button">Sign in</a></li>
 						<li><a href="{{ url('/register') }}" class="button special">Sign Up</a></li>
 					</ul>
+					@endif
 				</section>
 
 			<!-- Main -->
