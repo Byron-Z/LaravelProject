@@ -41,7 +41,7 @@ $(document).ready (function(){
             ['height', ['height']],
             ['table', ['table']],
             ['insert', ['link', 'picture', 'hr']],
-            ['view', ['fullscreen', /*'codeview'*/]],
+            ['view', ['fullscreen', 'codeview']],
             ['help', ['help']]
           ],
         callbacks: {

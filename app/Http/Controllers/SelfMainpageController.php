@@ -20,16 +20,6 @@ use Mail;
 
 class SelfMainpageController extends ArticleBaseController
 {
-/*    private $tags;
-    private $recentPosts;
-    private $profile;
-
-    public function __construct()
-    {
-        $this->tags = Tag::with(['user' => function ($query) {$query->where('id', Auth::id());}])->where('count', '>', '0')->orderBy('count', 'desc')->orderBy('updated_at', 'desc')->take(8)->get();
-        $this->recentPosts = Article::where('article_uid', Auth::id())->orderBy('created_at', 'desc')->take(3)->get();
-        $this->profile = UserProfile::where('user_id', Auth::id())->get()->first();
-    }*/
 
     public function redirectAfterLoginRegister()
     {
@@ -71,29 +61,42 @@ class SelfMainpageController extends ArticleBaseController
         }
     }
 
+    public function gettag(Request $request)
+    {
+        if(Auth::check())
+        {
+            $tag = Tag::where('id', $request->input('id'))->get()->first();
+            $articles = $tag->articles()->where('article_uid', Auth::id())->orderBy('updated_at', 'desc')->simplePaginate(20);
+            return view('tag', ['articles' => $articles, 'tag' => $tag, ]);
+        }
+    }
+
     // function base is used by index() and search() and archives() 
     private function base($articles)
     {   
         //DB::enableQueryLog();
         $data = array();
         for ($i = 0; $i < count($articles); $i++) {
-            $maxLine = 6;
-            $pieces = explode("\r\n", $articles[$i]->content);
-            $lines = count($pieces);
-            $nowLine = 1;    
-            $linePos = 0;
             $result = '';
-            while($nowLine <= $lines && $nowLine < $maxLine) {
-                if (strlen($pieces[$linePos]) > 0) {
-                    $result = $result.$pieces[$linePos]."\r\n";
-                    $nowLine++;
-                }
-                $linePos++;
+
+            if (str_contains($articles[$i]->content, '<hr>')) {
+                $length = stripos($articles[$i]->content, '<hr>');
+                $request = substr($articles[$i]->content, 0, $length);
+            } else if (str_contains($articles[$i]->content, '<p>')) {
+                $start = stripos($articles[$i]->content, '<p>');
+                $length = stripos($articles[$i]->content, '</p>') - $start - 3;
+                $result = substr($articles[$i]->content, $start + 3, $length);
+            } else if (str_contains($articles[$i]->content, '</h')) {
+                $start = stripos($articles[$i]->content, '<h');
+                $length = stripos($articles[$i]->content, '</h') - $start - 4;
+                $result = substr($articles[$i]->content, $start + 4, $length);
+            } else {
+                $result = substr($articles[$i]->content, 0, 240);
             }
-                //$item = Collection::make($articles[$i]);
-            //$item->put('summary', Parsedown::instance()->text($result));
+
             $data[$i] = Parsedown::instance()->text($result);
         }
+
         return view('personal_mainpage', ['articles' => $articles, 'data' => $data, ]);
     }
     

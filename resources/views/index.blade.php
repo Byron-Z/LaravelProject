@@ -18,7 +18,7 @@
 
 			<!-- Header -->
 				<header id="header" class="alt">
-					<h1><a href="{{url('/')}}">F&B</h1>
+					<img src="{{URL::asset("images/logo.png")}}" alt="Fancy Blog">
 					<nav id="nav">
 						<ul>
 							<li><a href="{{ url('/blog') }}">Home</a></li>

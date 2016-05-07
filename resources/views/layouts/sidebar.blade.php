@@ -14,10 +14,10 @@
 		</div>
 		<!-- END SIDEBAR USER TITLE -->
 		<!-- SIDEBAR BUTTONS -->
-		<div class="profile-userbuttons">
+		<!-- <div class="profile-userbuttons">
 			<button type="button" class="btn btn-success btn-sm">Follow</button>
 			<button type="button" class="btn btn-danger btn-sm">Message</button>
-		</div>
+		</div> -->
 		<!-- END SIDEBAR BUTTONS -->
 		<!-- SIDEBAR MENU -->
 		<div class="profile-usermenu">
@@ -32,18 +32,18 @@
 						<i class="glyphicon glyphicon-user"></i>
 					Write Blog </a>
 				</li>
-				<li>
+				<li {!! Request::is('archives') ? 'class="active"' : '' !!}>
 					<a href="{{url('/archives')}}" target="_blank">
 						<i class="glyphicon glyphicon-ok"></i>
 					Archives </a>
 				</li>
-				<li>
+				<li {!! Request::is('profile') ? 'class="active"' : '' !!}>
 					<a href="{{url('/profile')}}">
 						<i class="glyphicon glyphicon-flag"></i>
 					About Me </a>
 				</li>
 				<li>
-					<a href="#">
+					<a href="mailto:{{Auth::user()->email}}" target="_top">
 						<i class="glyphicon glyphicon-flag"></i>
 					Contact Me </a>
 				</li>
@@ -84,7 +84,7 @@
             @foreach ($sidebarTags as $sidebarTag)
             <div class="row">
 				<div class="col-lg-6">
-					<a href="/tag?{{$sidebarTag->id}}">{{$sidebarTag->name}}</a>
+					<a href="/tag?id={{$sidebarTag->id}}">{{$sidebarTag->name}}</a>
 				</div>
 				<div class="col-lg-3"></div>
 				<div class="col-lg-3"><span class="badge">{{$sidebarTag->count}}</span></div>
