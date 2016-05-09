@@ -10,7 +10,7 @@
 				</div>
 				<div class="col-lg-7"></div>
 				<div class="col-lg-3">
-				<p>© 2016 By <a href="http://project.app" target="_blank">http://project.app</a></p>
+				<p>© 2016 By <a href="http://fancyblog" target="_blank">http://FancyBlog</a></p>
 				</div>				
 			</div>
 

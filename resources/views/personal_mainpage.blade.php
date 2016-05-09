@@ -13,7 +13,8 @@
                 @if (isset($articles))
                     @for ($i = 0; $i < count($articles); $i++)
                     <h2>
-                    <a href="/blog/article?id={{$articles[$i]->id}}">{{$articles[$i]->title}}</a>
+                    <p class="blog-type">[{{$articles[$i]->type == 0 ? "Original" : ($articles[$i]->type == 1 ? "Reproduction" : "Translation") }}]&nbsp;&nbsp;</p>
+                    <a class="blog-title-font" href="/blog/article?id={{$articles[$i]->id}}">{{$articles[$i]->title}}</a>
                     </h2>
                     <p>
                         <span class="glyphicon glyphicon-time"></span> Posted on {{$articles[$i]->created_at}}

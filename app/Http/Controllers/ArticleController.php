@@ -18,17 +18,17 @@ use Auth;
 
 class ArticleController extends ArticleBaseController
 {
-
+    // Create article
     public function create()
     {
-        DB::enableQueryLog();
         $tags = Tag::with(['user' => function ($query) {$query->where('id', Auth::id());}])->orderBy('count', 'desc')->orderBy('updated_at', 'desc')->get();
-        //dd(DB::getQueryLog());
         return view('create', ['tags' => $tags, ]);
     }
 
+    //Edit article
     public function edit($id)
     {
+        //Get data related article from database
         $article = Article::find($id);
         $tags = Tag::with(['user' => function ($query) {$query->where('id', Auth::id());}])->orderBy('count', 'desc')->orderBy('updated_at', 'desc')->get();
         $tagUsed = $article->tags;
@@ -36,13 +36,8 @@ class ArticleController extends ArticleBaseController
         return view('edit', ['article' => $article, 'tags' => $tags, 'tagUsed' => $tagUsed, 'type' => $type[$article->type], ]);
     }
 
-/*    public function preview(Request $request) 
-    {
-        if ($request->has('content')) {
-    		return Parsedown::instance()->text($request->input('content'));
-    	}
-	}*/
-
+    /*When user uploads picture in summernote editor, we upload the image 
+    to database directly instead of storing as base64 format in summernote*/
     public function ajaxUpload(Request $request) 
     {
         if (isset($request->file)) {
@@ -54,10 +49,12 @@ class ArticleController extends ArticleBaseController
         } 
     }
 
+    //Get file in website
     public function getfile($id, $filename) {
         return response()->file('storage/uploads/'.Auth::id().'/'.$filename);
     }
 
+    //Store article data into database
     public function store(Request $request) 
     {
         $rules = [
@@ -65,6 +62,7 @@ class ArticleController extends ArticleBaseController
         'summernote' => 'required',
         'tags'    => 'required',
         ];
+        //Use validator to check the data that user input
         $validator = Validator::make($request->input(), $rules);
         if ($validator->passes()) {
             $article = Article::firstOrCreate([
@@ -77,6 +75,8 @@ class ArticleController extends ArticleBaseController
                 'type' => $request->has('article-type') ? $request->input('article-type') : 0 ,
             ]);
 
+            //If user selects the exist tag, we just add the count of tag;
+            //else we add a new tag into database.
             $tag = Tag::where('tag_uid', Auth::id())->where('name', $request->input('tags'))->first();
             if (isset($tag)) {
                 $tag->increment('count');
@@ -92,7 +92,6 @@ class ArticleController extends ArticleBaseController
 
             /*if ($request->hasFile('image')) {
                 if ($request->file('image')->isValid()) {
-                    //dd($request->file('image');
                     $destPath = '/home/vagrant/Code/Project/resources/uploads/'.Auth::id(); // upload path
                     $extension = $request->file('image')->getClientOriginalExtension();
                     $fileName = date('Y_m_d_H_i_s').'_'.rand(1,9999).'.'.$extension; // renameing image
@@ -104,7 +103,6 @@ class ArticleController extends ArticleBaseController
                         'extension' => $extension,
                         'save_path' => $destPath,
                     ]);
-                    //dd($request->file('image')->getRealPath());
                 }
             }*/
             
@@ -115,6 +113,7 @@ class ArticleController extends ArticleBaseController
         }
     }
 
+    //update article data
     public function update(Request $request) 
     {
         $rules = [
@@ -151,6 +150,7 @@ class ArticleController extends ArticleBaseController
         }
     }
 
+    //delete article
     public function destory($id)
     {
         $article = Article::find($id)->get()->first();

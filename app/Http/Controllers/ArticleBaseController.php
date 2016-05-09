@@ -13,7 +13,7 @@ use App\UserProfile;
 use Auth;
 use View;
 
-
+//Get data from database for sidebar and share these data to different views
 class ArticleBaseController extends Controller
 {
     

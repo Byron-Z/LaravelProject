@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <a class="pull-left" href="http://project.app">
+      <a class="pull-left" href="http://fancyblog">
         <img src="{{URL::asset("images/logo.png")}}" alt="Fancy Blog" height="50px">
       </a>
     </div>

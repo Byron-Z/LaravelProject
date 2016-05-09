@@ -9,7 +9,10 @@
 			<div class="col-md-9">
 
 				@if (isset($article))
-				 	<h2>{{$article->title}}</h2>
+				 	<h2>
+				 		<p class="blog-type">[{{$article->type == 0 ? "Original" : ($article->type == 1 ? "Reproduction" : "Translation") }}]&nbsp;</p>
+				 		{{$article->title}}
+				 	</h2>
                     <p>
                         <span class="glyphicon glyphicon-time"></span> Posted on {{$article->created_at}}
                         &nbsp;&nbsp;

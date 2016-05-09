@@ -33,7 +33,7 @@
 					Write Blog </a>
 				</li>
 				<li {!! Request::is('archives') ? 'class="active"' : '' !!}>
-					<a href="{{url('/archives')}}" target="_blank">
+					<a href="{{url('/archives')}}">
 						<i class="glyphicon glyphicon-ok"></i>
 					Archives </a>
 				</li>

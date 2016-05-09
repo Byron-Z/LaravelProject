@@ -21,10 +21,13 @@ use Mail;
 class SelfMainpageController extends ArticleBaseController
 {
 
+    //Redirect to home page after user login
     public function redirectAfterLoginRegister()
     {
         return redirect()->action('SelfMainpageController@index');
     }
+
+    //Contact request by user
     public function contactByUser(Request $request){
         $name = $request->input('name');
         $email = $request->input('email');
@@ -41,7 +44,7 @@ class SelfMainpageController extends ArticleBaseController
         return view('contact',['msg' => "Thanks for your feedback, we will get back you ASAP!!"]);
     }
 
-
+    //Show user recent posts in user mainpage
     public function index()
     {
         if(Auth::check())
@@ -51,7 +54,7 @@ class SelfMainpageController extends ArticleBaseController
         }
     }
 
-
+    //The archives of user articles ordered by date
     public function archives()
     {
          if(Auth::check())
@@ -61,6 +64,7 @@ class SelfMainpageController extends ArticleBaseController
         }
     }
 
+    //Show articles belong to same tag
     public function gettag(Request $request)
     {
         if(Auth::check())
@@ -74,7 +78,6 @@ class SelfMainpageController extends ArticleBaseController
     // function base is used by index() and search() and archives() 
     private function base($articles)
     {   
-        //DB::enableQueryLog();
         $data = array();
         for ($i = 0; $i < count($articles); $i++) {
             $result = '';
@@ -100,6 +103,7 @@ class SelfMainpageController extends ArticleBaseController
         return view('personal_mainpage', ['articles' => $articles, 'data' => $data, ]);
     }
     
+    //Search articles based on the title of each article
     public function search(Request $request)
     {
         $articles = Article::where('title', $request->input('search'))->orderBy('updated_at', 'desc')->simplePaginate(3);
@@ -110,9 +114,7 @@ class SelfMainpageController extends ArticleBaseController
         }
     }
 
-
-
-
+    //Expand to show the whole content of an article
     public function readMore(Request $request)
     {
     	if(Auth::check())
@@ -125,6 +127,7 @@ class SelfMainpageController extends ArticleBaseController
 	    }
     }
 
+    //Show user profile
     public function showProfile()
     {
         if(Auth::check())
@@ -142,7 +145,7 @@ class SelfMainpageController extends ArticleBaseController
         }
     }
 
-
+    //Save user profile
     public function saveProfile(Request $request)
     {
         if(Auth::check())
@@ -170,13 +173,11 @@ class SelfMainpageController extends ArticleBaseController
                 if($validator2->passes()){
                     if ($request->hasFile('image')) {
                         if ($request->file('image')->isValid()) {
-                            //dd($request->file('image');
                             $destPath = '/home/vagrant/Code/Project/LaravelProject/public/storage/uploads/'.Auth::id(); // upload path
                             $extension = $request->file('image')->getClientOriginalExtension();
                             $fileName = date('Y_m_d_H_i_s').'_'.rand(1,9999).'.'.$extension; // renameing image
                             $request->file('image')->move($destPath, $fileName);
                             $this->userProfile->portrait = 'storage/uploads/'.Auth::id().'/'.$fileName;
-                            //dd($request->file('image')->getRealPath());
                         }
                     }
 
@@ -210,12 +211,10 @@ class SelfMainpageController extends ArticleBaseController
                     $fileName = "";
                     if ($request->hasFile('image')) {
                         if ($request->file('image')->isValid()) {
-                            //dd($request->file('image');
                             $destPath = '/home/vagrant/Code/Project/LaravelProject/public/storage/uploads/'.Auth::id(); // upload path
                             $extension = $request->file('image')->getClientOriginalExtension();
                             $fileName = date('Y_m_d_H_i_s').'_'.rand(1,9999).'.'.$extension; // renameing image
                             $request->file('image')->move($destPath, $fileName);
-                            //dd($request->file('image')->getRealPath());
                         }
                     }
                     UserProfile::create([

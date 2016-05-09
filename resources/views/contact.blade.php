@@ -1,9 +1,5 @@
 <!DOCTYPE HTML>
-<!--
-	Alpha by HTML5 UP
-	html5up.net | @n33co
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
+
 <html>
 	<head>
 		<title>Contact - Blog </title>
@@ -18,7 +14,7 @@
 
 			<!-- Header -->
 				<header id="header">
-					<h1><a href="{{ url('/') }}">F&B<a></h1>
+					<h1><a href="{{ url('/') }}">Fancy Blog<a></h1>
 					<nav id="nav">
 						<ul>
 							<li><a href="{{ url('/blank') }}">Home</a></li>
