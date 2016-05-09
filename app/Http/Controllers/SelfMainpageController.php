@@ -84,7 +84,7 @@ class SelfMainpageController extends ArticleBaseController
 
             if (str_contains($articles[$i]->content, '<hr>')) {
                 $length = stripos($articles[$i]->content, '<hr>');
-                $request = substr($articles[$i]->content, 0, $length);
+                $result = substr($articles[$i]->content, 0, $length);
             } else if (str_contains($articles[$i]->content, '<p>')) {
                 $start = stripos($articles[$i]->content, '<p>');
                 $length = stripos($articles[$i]->content, '</p>') - $start - 3;
@@ -106,7 +106,7 @@ class SelfMainpageController extends ArticleBaseController
     //Search articles based on the title of each article
     public function search(Request $request)
     {
-        $articles = Article::where('title', $request->input('search'))->orderBy('updated_at', 'desc')->simplePaginate(3);
+        $articles = Article::where('title', 'like', "%".$request->input('search')."%")->orderBy('updated_at', 'desc')->simplePaginate(3);
         if($articles == null || count($articles) == 0){
             return view('not_found');
         } else{
