@@ -226,6 +226,12 @@ class SelfMainpageController extends ArticleBaseController
                     'description' => $request->input('description'),
                     'portrait' => 'storage/uploads/'.Auth::id().'/'.$fileName,
                     ]);
+
+                    $this->userProfile = UserProfile::where('user_id', Auth::id())->get()->first();
+                    $this->userProfile->description = $request->input('description');
+                    $this->userProfile->portrait = 'storage/uploads/'.Auth::id().'/'.$fileName;
+
+                    $this->userProfile->save();
                     
                     $user = User::where('id', Auth::id())->get()->first();
                     $user->name = ($request->input('name') == "") ? $user->name : $request->input('name');
